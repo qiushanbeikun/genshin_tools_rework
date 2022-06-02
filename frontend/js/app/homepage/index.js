@@ -13,8 +13,8 @@ const HomePageContainer = styled.div`
 export default function Homepage() {
   return (
     <HomePageContainer>
-      <Typography variant="h2">Genshin Impact Tools</Typography>
-      <Typography>123132</Typography>
+      <Typography variant="h3">Genshin Impact Tools</Typography>
+      <Typography>Author: Qiushanbeikun</Typography>
     </HomePageContainer>
   )
 }

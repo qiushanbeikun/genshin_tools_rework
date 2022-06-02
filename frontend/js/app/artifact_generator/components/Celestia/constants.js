@@ -1,3 +1,5 @@
+import i18n from "../../../../localization/i18n";
+
 export const INITIAL_INPUT_VALUES = {
   "title": "",
   "position": "",
@@ -25,39 +27,39 @@ export const DEFAULT_CROP_SIZE = {
 export const INPUT_FIELDS = [
   {
     name: "title",
-    text: "Artifact Title",
+    text: i18n.t("generator_ui:artifact_title"),
   },
   {
     name: "position",
-    text: "Artifact Position",
+    text: i18n.t("generator_ui:artifact_position"),
   },
   {
     name: "main_prop",
-    text: "Main Property",
+    text: i18n.t("generator_ui:main_property"),
   },
   {
     name: "main_prop_val",
-    text: "Main Property Value",
+    text: i18n.t("generator_ui:main_property_value"),
   },
   {
     name: "vice_prop1",
-    text: "Secondary Prop 1",
+    text: `${i18n.t("generator_ui:secondary_property")} 1`,
   },
   {
     name: "vice_prop2",
-    text: "Secondary Prop 2",
+    text: `${i18n.t("generator_ui:secondary_property")} 2`,
   },
   {
     name: "vice_prop3",
-    text: "Secondary Prop 3",
+    text: `${i18n.t("generator_ui:secondary_property")} 3`,
   },
   {
     name: "vice_prop4",
-    text: "Secondary Prop 4",
+    text: `${i18n.t("generator_ui:secondary_property")} 4`,
   },
   {
     name: "desc_title",
-    text: "Description Title",
+    text: i18n.t("generator_ui:desc_title"),
   },
 ]
 

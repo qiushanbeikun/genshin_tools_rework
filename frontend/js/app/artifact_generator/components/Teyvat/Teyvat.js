@@ -15,7 +15,7 @@ import axios from "axios";
 export default function Teyvat() {
 
   const classes = GenshinStyles();
-  const {t, i18n} = useTranslation("generator_ui");
+  const {t} = useTranslation("generator_ui");
   const [artifact, setArtifact] = useState();
 
   const handleSubmit = (values) => {
@@ -36,7 +36,7 @@ export default function Teyvat() {
     <FormikProvider value={formik}>
       <Grid container spacing={1} className={classes.root}>
         <Grid item xs={6}>
-          <h4>Editor</h4>
+          <h4>{t("editor")}</h4>
 
           <form onSubmit={formik.handleSubmit}>
 

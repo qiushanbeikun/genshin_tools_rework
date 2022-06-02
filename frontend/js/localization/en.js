@@ -17,11 +17,46 @@ const en = {
     secondary_property: "Secondary Property",
     generate: "Generate",
     not_selected: "Not Selected",
+    percent: "Percentage",
+    allow_blank: "Allow Blank Fields?",
+    artifact_photo: "Artifact Photo",
+    artifact_title: "Artifact Title",
+    main_property_value: "Main Property Value",
+    desc_title: "Description Title",
+    desc: "Description (Max 7 Lines)",
+    owner: "Owner",
+    preview: "preview",
+    modify_crop: "Modify Crop",
+
+
   },
   artifact_props: {
-
+    atk: "ATK",
+    atk_percent: "ATK Percentage",
+    def: "DEF",
+    def_percent: "DEF Percentage",
+    hp: "HP",
+    hp_percent: "HP Percentage",
+    ctk_rate: "CRIT Rate",
+    ctk_dmg: "CRIT DMG",
+    ele_mastery: "Elemental Mastery",
+    recharge_rate: "Energy Recharge",
+    heal_buff: "Healing Bonus",
+    phy_buff: "Physical DMG Bonus",
+    pyro_buff: "Pyro DMG Bonus",
+    electro_buff: "Electro DMG Bonus",
+    cryo_buff: "Cryo DMG Bonus",
+    hydro_buff: "Hydro DMG Bonus",
+    anemo_buff: "Anemo DMG Bonus",
+    geo_buff: "Geo DMG Bonus",
   },
-
+  artifact_positions: {
+    flower: "Flower of Life",
+    feather: "Plume of Death",
+    sand: "Sand of Eon",
+    cup: "Goblet of Eonothem",
+    head: "circlet of Logos",
+  }
 }
 
 export default en;

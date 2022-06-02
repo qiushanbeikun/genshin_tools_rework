@@ -16,7 +16,9 @@ export function VicePropRow({index}) {
   const [prop, count] = Object.values(vice_props[index]);
 
   useEffect(() => {
-    setFieldValue("vice_props", INITIAL_ARTI_CONFIG.vice_props);
+    // todo touched not working here, need to investigate to optimize rendering
+      console.log("triggered reset of vice props");
+      setFieldValue("vice_props", INITIAL_ARTI_CONFIG.vice_props);
   }, [position, main_prop])
 
   const vicePropHandler = (ctx) => {
