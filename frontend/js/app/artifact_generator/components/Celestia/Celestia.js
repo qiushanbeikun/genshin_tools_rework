@@ -3,12 +3,13 @@ import {useRef, useState} from "react";
 import {Button, Checkbox, Grid} from "@mui/material";
 import ReactCrop from "react-image-crop";
 import Modal from "react-modal";
-import {DEFAULT_ARTIFACT_IMG_SIZE, INITIAL_INPUT_VALUES, INPUT_FIELDS} from "./constants";
+import {DEFAULT_CROP_SIZE, INITIAL_INPUT_VALUES, INPUT_FIELDS} from "./constants";
 import imgTemplate from "../../../../../assets/images/celestia_template.png";
 import {GenshinStyles} from "../../../../theme";
 import axios from "axios";
 import {getCroppedImg} from "./imgProcess";
 import {SImg, StyledPreview, StyledTextField} from "../../styles";
+
 
 
 export default function Celestia() {
@@ -20,7 +21,7 @@ export default function Celestia() {
   const [imgPath, setImgPath] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [croppedImg, setCroppedImg] = useState();
-  const [crop, setCrop] = useState(DEFAULT_ARTIFACT_IMG_SIZE);
+  const [crop, setCrop] = useState(DEFAULT_CROP_SIZE);
   const imgRef = useRef();
 
   const handleInputChange = (e) => {
@@ -138,10 +139,13 @@ export default function Celestia() {
           <h4>{!!artifactProfile ? "Artifact \"Screenshot\"" : "Artifact Template"}</h4>
           {!!artifactProfile ? <SImg src={`data:image/png;base64,${artifactProfile}`}/> : <SImg src={imgTemplate}/>}
         </Grid>
+        {/*<ReactCrop crop={crop}>*/}
+        {/*  <img src={imgTemplate}/>*/}
+        {/*</ReactCrop>*/}
       </Grid>
 
       <div>
-        <Modal isOpen={isModalOpen}>
+        <Modal isOpen={isModalOpen} ariaHideApp={false}>
           <p>Image Crop</p>
           <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={handleCropComplete} aspect={1}>
             <img src={imgPath} alt="img_to_crop" ref={imgRef}/>

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import Home from './pages/Home';
 import configureStore from './store';
 import SentryBoundary from './utils/SentryBoundary';
+import "./localization/i18n"
 
 const store = configureStore({});
 const App = () => (

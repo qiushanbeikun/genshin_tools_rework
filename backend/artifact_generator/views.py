@@ -15,6 +15,4 @@ def celestia(request):
 @api_view(['POST'])
 def teyvat(request):
     if request.method == 'POST':
-        print(request.data)
-        response_data = {"data": generate_teyvat(request.data).decode(ENCODING)}
-        return JsonResponse(response_data)
+        return JsonResponse({"data": generate_teyvat(request.data).decode(ENCODING)})

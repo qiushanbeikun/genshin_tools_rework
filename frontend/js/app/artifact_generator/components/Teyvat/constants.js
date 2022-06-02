@@ -93,9 +93,9 @@ export const POSITION = {
 export const ARTIFACT_NAMES = {
   'flower': '明威之镡',
   'feather': '切落之羽',
-  'sandglass': '雷云之笼',
-  'goblet': '绯花之壶',
-  'crown': '华饰之兜',
+  'sand': '雷云之笼',
+  'cup': '绯花之壶',
+  'head': '华饰之兜',
 }
 
 const localizations = {
@@ -315,7 +315,7 @@ export const MAIN_PROP_TRANS = {
   'life': '生命值',
   'life_percent': '生命值百分比',
   'ele_buff': '46.6%',
-  'phy_buff':  '物理伤害加成',
+  'phy_buff': '物理伤害加成',
   'def': '防御力',
   'ctk_rate': '暴击率',
   'ctk_dmg': '暴击伤害',
@@ -336,15 +336,39 @@ export const ENHANCE_RATES = {
   'ctk_dmg': [5.4, 6.2, 7.0, 7.8],
 }
 
-export const ARTIFACT_POSITIONS = ["flower", "feather", "sand", "cup", "head"];
-
-export const INITIAL_ARTI_CONFIG = {
-  position: "flower",
-  main_prop: 0,
-  vice_props: [0,0,0,0],
-  vice_counts: [1,1,1,1],
+export const POSITION_CONSTRAINTS = {
+  "flower": FLOWER_CONSTRAINT,
+  "feather": FEATHER_CONSTRAINT,
+  "sand": SANDGLASS_CONSTRAINT,
+  "cup": GOBLET_CONSTRAINT,
+  "head": CROWN_CONSTRAINT,
 }
 
+export const ARTIFACT_POSITIONS = ["flower", "feather", "sand", "cup", "head"];
+export const DEFAULT_MAIN_PROP = 0;
+export const INITIAL_VICE_PROPS = [
+  {
+    prop: 0,
+    count: 1,
+  },
+  {
+    prop: 0,
+    count: 1,
+  },
+  {
+    prop: 0,
+    count: 1,
+  },
+  {
+    prop: 0,
+    count: 1,
+  },
+]
 
 
-
+export const INITIAL_ARTI_CONFIG = {
+  position: ARTIFACT_POSITIONS[0],
+  main_prop: DEFAULT_MAIN_PROP,
+  vice_props: INITIAL_VICE_PROPS,
+  used_props: FLOWER_CONSTRAINT,
+}

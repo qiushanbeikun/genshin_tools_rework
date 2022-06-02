@@ -14,7 +14,7 @@ export const INITIAL_INPUT_VALUES = {
   "allowBlank": true,
 }
 
-export const DEFAULT_ARTIFACT_IMG_SIZE = {
+export const DEFAULT_CROP_SIZE = {
   unit: "px",
   x: 25,
   y: 25,

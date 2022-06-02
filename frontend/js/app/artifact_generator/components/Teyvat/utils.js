@@ -1,11 +1,8 @@
 import {
   ARTIFACT_NAMES,
-  CROWN_CONSTRAINT,
   ENHANCE_RATES,
-  FEATHER_CONSTRAINT,
-  FLOWER_CONSTRAINT,
-  GOBLET_CONSTRAINT, INITIAL_ARTI_CONFIG, MAIN_PROP_RATE, MAIN_PROP_TYPES,
-  SANDGLASS_CONSTRAINT, VICE_PROP_TYPE
+  INITIAL_ARTI_CONFIG, MAIN_PROP_RATE, POSITION_CONSTRAINTS,
+  VICE_PROP_TYPE
 } from "./constants";
 
 const randomEnhance = (list, level) => {
@@ -16,8 +13,7 @@ const randomEnhance = (list, level) => {
   return result;
 }
 
-
-export const calcEnhancement = (prop, level) => {
+export const calcEnhance = (prop, level) => {
   switch (prop) {
     case 1:
       return randomEnhance(ENHANCE_RATES.atk_num, level);
@@ -44,29 +40,11 @@ export const calcEnhancement = (prop, level) => {
   }
 }
 
-export const propTypeParser = (prop) => {
+export const propNameParser = (prop) => {
   return (prop.includes('百分比') ? prop.replace('百分比', '') : prop)
 }
 
-export function getConstraint(position) {
-  switch (position) {
-    case "flower":
-      return FLOWER_CONSTRAINT;
-    case "feather":
-      return FEATHER_CONSTRAINT;
-    case "sand":
-      return SANDGLASS_CONSTRAINT;
-    case "cup":
-      return GOBLET_CONSTRAINT;
-    case "head":
-      return CROWN_CONSTRAINT;
-    default:
-    case "all":
-      return MAIN_PROP_TYPES;
-  }
-}
-
-export function ucFirst(str) {
+export function upperCase(str) {
   let firstLetter = str.substr(0, 1);
   return firstLetter.toUpperCase() + str.substr(1);
 }
@@ -79,39 +57,52 @@ export function resetViceProps(curPos, curMainProp = 0) {
   }
 }
 
-export const isEnhanceAble = (artiConfig) => {
-  return (9 - artiConfig.vice_counts.reduce((acc, cur) => acc + cur, 0)) > 0;
+export const isEnhanceAble = (vice_props) => {
+  return (9 - vice_props.map((prop)=> prop.count).reduce((acc, cur) => acc + cur, 0)) > 0;
 }
 
 export function getNewUsedProps(curUsedProps, curIdx, prevIdx) {
   // remove previous one
+  let res = [...curUsedProps]
+  console.log(res)
   if (prevIdx !== 0) {
-    curUsedProps.splice(curUsedProps.indexOf(VICE_PROP_TYPE[prevIdx - 1]), 1)
+    res.splice(res.indexOf(VICE_PROP_TYPE[prevIdx - 1]), 1)
   }
-  let res = curUsedProps;
+  console.log(res)
   // add current
   if (curIdx !== 0) {
     res = [...res, VICE_PROP_TYPE[curIdx - 1]]
   }
+  console.log(res)
   return res;
 }
 
-export function getParsedArtiConfig(artiConfig, constraints) {
+export function getParsedArtiConfig(artiConfig) {
+  console.log(artiConfig)
   const VICE_NAMES = ['viceOne', 'viceTwo', 'viceThree', 'viceFour'];
   const position = artiConfig.position;
-  const mainProp = constraints[artiConfig.main_prop];
-  console.log(artiConfig, constraints, mainProp)
+  const constraints = POSITION_CONSTRAINTS[position];
+  const mainPropName = constraints[artiConfig.main_prop];
+  console.log(artiConfig, constraints, mainPropName)
   let res = {
     "title": ARTIFACT_NAMES[position],
     "position": position,
-    "mainProp": propTypeParser(mainProp),
-    'mainPropRate': MAIN_PROP_RATE[mainProp],
+    "mainProp": propNameParser(mainPropName),
+    'mainPropRate': MAIN_PROP_RATE[mainPropName],
   }
   VICE_NAMES.map((name, index) => {
-    const prop = artiConfig.vice_props[index];
-    const count = artiConfig.vice_counts[index];
-    console.log(prop, count, mainProp)
-    res = Object.assign(res, {[name]: `${propTypeParser(VICE_PROP_TYPE[prop-1])} +${calcEnhancement(prop, count)}`})
+    const ctx = artiConfig.vice_props[index];
+    const prop = ctx.prop;
+    const count = ctx.count;
+    console.log(prop, count)
+    res = Object.assign(res, {[name]: `${propNameParser(VICE_PROP_TYPE[prop - 1])} +${calcEnhance(prop, count)}`})
   })
+  console.log(res)
+  return res;
+}
+
+export function getNewViceProps(curViceProps, ctx, index) {
+  let res = [...curViceProps];
+  res[index] = ctx;
   return res;
 }

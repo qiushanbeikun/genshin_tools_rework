@@ -6,10 +6,12 @@ from .utils import *
 
 def generate_teyvat(config):
     background, vice_font, main_prop_font, main_prop_rate_font, title_font = get_bases("template_blank1.png")
-    image_position = get_arti_pos(config['position'])
+    image_position = config['position']
+    print(config)
 
     # todo: make name const at this moment, support of other artifacts are in future releases
     name = "绝缘之旗印"
+    print(image_position, name)
     artifact_img = get_arti_image(image_position, name)
     artifact_img = artifact_img.resize((TEYVAT_PHOTO_SIZE, TEYVAT_PHOTO_SIZE))
 
@@ -19,7 +21,7 @@ def generate_teyvat(config):
     image.text((39, 12), config['title'], (255, 255, 255), font=title_font)
     image.text((37, 93), config['position'], (255, 255, 255), font=main_prop_font)
     image.text((39, 197), config['mainProp'], (194, 175, 168), font=main_prop_font)
-    image.text((39, 230), config['mainPropRate'], (255, 255, 255), font=main_prop_rate_font)
+    # image.text((39, 230), config['mainPropRate'], (255, 255, 255), font=main_prop_rate_font)
 
     image.text((68, 467), config['viceOne'], (73, 82, 103), font=vice_font)
     image.text((68, 516), config['viceTwo'], (73, 82, 103), font=vice_font)

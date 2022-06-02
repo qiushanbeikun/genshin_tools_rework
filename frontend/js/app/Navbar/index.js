@@ -9,6 +9,7 @@ import {Button} from "@mui/material";
 import {createTheme} from '@mui/material/styles';
 import styled from "@emotion/styled";
 import {GenshinStyles} from "../../theme";
+import {useTranslation} from "react-i18next";
 
 const theme = createTheme({
   palette: {
@@ -43,6 +44,9 @@ export default function ButtonAppBar() {
 
   const classes = GenshinStyles();
 
+  // const {t, i18n} = useTranslation("translations", {keyPrefix: "navbar"});
+  const {t, i18n} = useTranslation("navbar");
+
   return (
     <>
       <AppBar position="relative" theme={theme}>
@@ -62,25 +66,25 @@ export default function ButtonAppBar() {
           </Link>
           <>
             <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/">Home</StyledAppBarLink>
+              <StyledAppBarLink to="/">{t("home")}</StyledAppBarLink>
             </Typography>
 
             <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/artifact_generator" theme={theme}>Artifact Generator</StyledAppBarLink>
+              <StyledAppBarLink to="/artifact_generator" theme={theme}>{t("artifact_generator")}</StyledAppBarLink>
             </Typography>
 
             <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/damage_calculator" theme={theme}>Damage Calculator</StyledAppBarLink>
+              <StyledAppBarLink to="/damage_calculator" theme={theme}>{t("damage_calculator")}</StyledAppBarLink>
             </Typography>
 
             <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/others" theme={theme}>Others</StyledAppBarLink>
+              <StyledAppBarLink to="/others" theme={theme}>{t("others")}</StyledAppBarLink>
             </Typography>
           </>
 
           <AuthButtons>
-            <Button color="inherit" className={classes.root}>Sign Up</Button>
-            <Button color="inherit" className={classes.root}>Login</Button>
+            <Button color="inherit" className={classes.root}>{t("sign_up")}</Button>
+            <Button color="inherit" className={classes.root}>{t("login")}</Button>
           </AuthButtons>
 
         </Toolbar>

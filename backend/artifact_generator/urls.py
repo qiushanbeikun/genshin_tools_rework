@@ -9,4 +9,5 @@ app_name = 'artifact_generator'
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('celestia/', views.celestia, name="celestia"),
+    path('teyvat/', views.teyvat, name="teyvat"),
 ]
