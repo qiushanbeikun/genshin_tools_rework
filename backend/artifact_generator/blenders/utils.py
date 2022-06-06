@@ -7,22 +7,22 @@ ZN_FONT_DIR = "./artifact_generator/assets/fonts/zh-cn.ttf"
 BACKGROUND_DIR = "./artifact_generator/assets/images/"
 
 
-def get_arti_pos(position):
-    match position:
-        case '生之花':
-            return 'flower'
-        case '死之羽':
-            return 'feather'
-        case '时之沙':
-            return 'sand'
-        case '空之杯':
-            return 'cup'
-        case '理之冠':
-            return 'head'
+# def get_arti_pos(position):
+#     match position:
+#         case '生之花':
+#             return 'flower'
+#         case '死之羽':
+#             return 'feather'
+#         case '时之沙':
+#             return 'sand'
+#         case '空之杯':
+#             return 'cup'
+#         case '理之冠':
+#             return 'head'
 
 
-def get_scale_ratio(photo_size):
-    return ARTIFACT_PHOTO_SIZE / photo_size
+# def get_scale_ratio(photo_size):
+#     return ARTIFACT_PHOTO_SIZE / photo_size
 
 
 def get_arti_image(pos, name):

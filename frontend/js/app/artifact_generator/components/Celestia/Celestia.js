@@ -155,7 +155,6 @@ export default function Celestia() {
           <Button onClick={handleModalClose}>Crop And Close</Button>
         </Modal>
       </div>
-
     </div>
   )
 }
