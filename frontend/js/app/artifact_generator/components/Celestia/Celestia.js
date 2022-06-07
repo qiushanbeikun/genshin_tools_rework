@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Fragment, useRef, useState} from "react";
-import {Button, Checkbox, Grid} from "@mui/material";
+import {Box, Button, Checkbox, Grid} from "@mui/material";
 import ReactCrop from "react-image-crop";
 import Modal from "react-modal";
 import {DEFAULT_CROP_SIZE, INITIAL_INPUT_VALUES, INPUT_FIELDS} from "./constants";
@@ -10,6 +10,7 @@ import axios from "axios";
 import {getCroppedImg} from "./imgProcess";
 import {SImg, StyledPreview, StyledTextField} from "../../styles";
 import i18n from "../../../../localization/i18n";
+import BtnGroup from "../btnGroup";
 
 
 export default function Celestia() {
@@ -24,6 +25,8 @@ export default function Celestia() {
   const [crop, setCrop] = useState(DEFAULT_CROP_SIZE);
   const imgRef = useRef();
 
+  const clearFields = () => setInputFields(INITIAL_INPUT_VALUES);
+
   const handleInputChange = (e) => {
     e.preventDefault();
     const {name, value} = e.target;
@@ -36,13 +39,14 @@ export default function Celestia() {
 
   const handleImgUpload = (e) => {
     e.preventDefault();
+    console.log(e.target.files[0])
     if (e.target.files.length !== 0) {
       setImgPath(URL.createObjectURL(e.target.files[0]));
       setIsModalOpen(true);
     }
   }
 
-  const handleCropComplete = (c, pc) => {
+  const handleCropComplete = (c) => {
     getCroppedImg(imgRef.current, c).then(([img, imgBase64]) => {
       setCroppedImg(img);
       setInputFields({...inputFields, "photo": imgBase64.split("base64,")[1]})
@@ -90,8 +94,8 @@ export default function Celestia() {
 
   return (
     <div>
-      <Grid container spacing={{xs: 2, md: 1}} className={classes.root}>
-        <Grid item xs={6}>
+      <Grid container spacing={{xs: 5, md: 1}} className={classes.root}>
+        <Grid item xs={7}>
           <h4>{i18n.t("generator_ui:editor")}</h4>
 
           <form onSubmit={submitHandler}>
@@ -109,8 +113,14 @@ export default function Celestia() {
               <Grid item xs={8}>
                 <input type="file" accept="image/*" id="select_artifact_img" onChange={handleImgUpload}/>
                 <button type="button" onClick={handleModifyCrop}>{i18n.t("generator_ui:modify_crop")}</button>
+              </Grid>
+
+              <Grid item xs={4}>
+                <p>{i18n.t("generator_ui:preview")}</p>
+              </Grid>
+              <Grid item xs={8}>
                 {(!!croppedImg) ? <StyledPreview src={croppedImg} alt="whatever"/> :
-                  <p>{i18n.t("generator_ui:preview")}</p>}
+                  <p>{i18n.t("generator_ui:preview_photo")}</p>}
               </Grid>
 
               {INPUT_FIELDS.map((field) => GenerateFormRow(field))}
@@ -133,13 +143,13 @@ export default function Celestia() {
               </Grid>
 
             </Grid>
-            <Button variant="contained" type="submit" className="submit_button">
-              {i18n.t("generator_ui:generate")}
-            </Button>
+
+            <BtnGroup func={clearFields}/>
+
           </form>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <h4>{i18n.t("generator_ui:artifact_screenshot")}</h4>
           {!!artifactProfile ? <SImg src={`data:image/png;base64,${artifactProfile}`}/> : <SImg src={imgTemplate}/>}
         </Grid>

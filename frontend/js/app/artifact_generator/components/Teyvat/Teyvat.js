@@ -11,6 +11,7 @@ import {FormikProvider, useFormik} from "formik";
 import {MainPropSelect} from "./mainPropSelect";
 import {VicePropRow} from "./vicePropRow";
 import axios from "axios";
+import BtnGroup from "../btnGroup";
 
 export default function Teyvat() {
 
@@ -53,10 +54,9 @@ export default function Teyvat() {
 
             <Grid container spacing={1}>
               {[0, 1, 2, 3].map((index) => <VicePropRow index={index}/>)}
-
             </Grid>
 
-            <Button variant="contained" type="submit" className="submit_button">{t("generate")}</Button>
+            <BtnGroup func={formik.handleReset}/>
           </form>
         </Grid>
 

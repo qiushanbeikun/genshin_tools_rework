@@ -4,6 +4,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {Box} from "@mui/material";
 import i18n from "i18next";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import {useState} from "react";
 
 const LANGUAGES = [
   {name: "en", text: "English"},
@@ -11,7 +14,8 @@ const LANGUAGES = [
 ]
 
 export default function BasicMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [spin, setSpin] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,7 +24,9 @@ export default function BasicMenu() {
     setAnchorEl(null);
   };
   const handleLangChange = (e, lang) => {
-    i18n.changeLanguage(lang)
+    // need to refresh the page ow some const are caches and will update.
+    setSpin(true);
+    i18n.changeLanguage(lang).then(() => window.location.reload(false))
   }
 
   return (
@@ -48,6 +54,10 @@ export default function BasicMenu() {
           <MenuItem onClick={(e) => handleLangChange(e, language.name)}>{language.text}</MenuItem>
         ))}
       </Menu>
+
+      <Backdrop sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}} open={spin}>
+        <CircularProgress color="inherit"/>
+      </Backdrop>
     </Box>
   );
 }

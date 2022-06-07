@@ -11,55 +11,52 @@ import {useTranslation} from "react-i18next";
 import LangChange from "./langChange";
 import {AuthButtons, StyledAppBarLink, theme} from "./styles";
 
-
 export default function ButtonAppBar() {
 
   const classes = GenshinStyles();
   const {t} = useTranslation("navbar");
 
   return (
-    <>
-      <AppBar position="relative" >
-        <Toolbar>
-          <Link to="/">
-            <IconButton
-              size="large"
-              edge="start"
-              aria-label="menu"
-              sx={{
-                mr: 2,
-                color: 'white'
-              }}
-            >
-              <MenuIcon/>
-            </IconButton>
-          </Link>
-          <>
-            <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/">{t("home")}</StyledAppBarLink>
-            </Typography>
+    <AppBar position="relative">
+      <Toolbar>
+        <Link to="/">
+          <IconButton
+            size="large"
+            edge="start"
+            aria-label="menu"
+            sx={{
+              mr: 2,
+              color: 'white'
+            }}
+          >
+            <MenuIcon/>
+          </IconButton>
+        </Link>
+        <>
+          <Typography variant="h6" component="div" className={classes.root}>
+            <StyledAppBarLink to="/">{t("home")}</StyledAppBarLink>
+          </Typography>
 
-            <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/artifact_generator">{t("artifact_generator")}</StyledAppBarLink>
-            </Typography>
+          <Typography variant="h6" component="div" className={classes.root}>
+            <StyledAppBarLink to="/artifact_generator">{t("artifact_generator")}</StyledAppBarLink>
+          </Typography>
 
-            <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/damage_calculator">{t("damage_calculator")}</StyledAppBarLink>
-            </Typography>
+          <Typography variant="h6" component="div" className={classes.root}>
+            <StyledAppBarLink to="/damage_calculator">{t("damage_calculator")}</StyledAppBarLink>
+          </Typography>
 
-            <Typography variant="h6" component="div" className={classes.root}>
-              <StyledAppBarLink to="/others">{t("others")}</StyledAppBarLink>
-            </Typography>
-          </>
+          <Typography variant="h6" component="div" className={classes.root}>
+            <StyledAppBarLink to="/others">{t("others")}</StyledAppBarLink>
+          </Typography>
+        </>
 
-          <AuthButtons>
-            <LangChange/>
-            <Button color="inherit" className={classes.root}>{t("sign_up")}</Button>
-            <Button color="inherit" className={classes.root}>{t("login")}</Button>
-          </AuthButtons>
+        <AuthButtons>
+          <LangChange/>
+          <Button color="inherit" className={classes.root}>{t("sign_up")}</Button>
+          <Button color="inherit" className={classes.root}>{t("login")}</Button>
+        </AuthButtons>
 
-        </Toolbar>
-      </AppBar>
-    </>
+      </Toolbar>
+    </AppBar>
   );
 }

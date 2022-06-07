@@ -26,7 +26,9 @@ const zh = {
     desc: "介绍 (最多7行)",
     owner: "佩戴者",
     preview: "预览",
+    preview_photo: "预览图片",
     modify_crop: "修改裁剪",
+    clear: "清除所有"
   },
   artifact_props: {
     atk: "攻击力",

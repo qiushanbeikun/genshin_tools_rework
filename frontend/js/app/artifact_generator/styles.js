@@ -10,7 +10,7 @@ export const SImg = styled.img`
   width: 538px;
 `;
 export const StyledTextField = styled(TextField)`
-  width: 75%;
+  width: 90%;
 `;
 export const StyledPreview = styled.img`
   width: 50%;

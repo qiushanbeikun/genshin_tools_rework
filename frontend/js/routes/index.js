@@ -6,7 +6,9 @@ export default function MyRoutes() {
   return (
     <Routes>
       <Route exact path="/" element={<Homepage/>}/>
-      <Route path="/artifact_generator" element={<Workshop/>}/>
+      <Route exact path="/artifact_generator" element={<Workshop/>}/>
+      {/*<Route exact path="/artifact_generator/teyvat" element={<Workshop mode="teyvat"/>}/>*/}
+      {/*<Route exact path="/artifact_generator/celestia" element={<Workshop mode="celestia"/>}/>*/}
     </Routes>
   )
 }

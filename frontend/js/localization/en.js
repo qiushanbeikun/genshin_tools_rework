@@ -25,9 +25,10 @@ const en = {
     desc_title: "Description Title",
     desc: "Description (Max 7 Lines)",
     owner: "Owner",
-    preview: "preview",
+    preview: "Preview",
+    preview_photo: "Preview Photo",
     modify_crop: "Modify Crop",
-
+    clear: "Clear Fields",
 
   },
   artifact_props: {
