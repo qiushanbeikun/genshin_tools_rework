@@ -2,7 +2,7 @@ import {GenshinStyles} from "../../../../theme";
 import {useTranslation} from "react-i18next";
 import {useFormikContext} from "formik";
 import * as React from "react";
-import {useEffect} from "react";
+import {Fragment, useEffect} from "react";
 import {INITIAL_ARTI_CONFIG, VICE_PROP_TYPE} from "./constants";
 import {getNewUsedProps, getNewViceProps, isEnhanceAble} from "./utils";
 import {Button, Grid, InputLabel, MenuItem, Select} from "@mui/material";
@@ -31,7 +31,7 @@ export function VicePropRow({index}) {
   }
 
   return (
-    <>
+    <Fragment key={index}>
       <Grid item xs={7}>
         <VicePropInput sx={{m: 1, minWidth: 120}}>
           <InputLabel className={classes.root}>{t("secondary_property")} {index + 1}</InputLabel>
@@ -63,6 +63,6 @@ export function VicePropRow({index}) {
                   disabled={(!isEnhanceAble(vice_props))}>+</Button>
         </StyledButtonGroup>
       </Grid>
-    </>
+    </Fragment>
   )
 }

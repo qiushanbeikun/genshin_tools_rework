@@ -4,7 +4,7 @@ import {Box, Button, Checkbox, Grid} from "@mui/material";
 import ReactCrop from "react-image-crop";
 import Modal from "react-modal";
 import {DEFAULT_CROP_SIZE, INITIAL_INPUT_VALUES, INPUT_FIELDS} from "./constants";
-import imgTemplate from "../../../../../assets/images/celestia_template.png";
+import imgTemplate from "../../../../../assets/images/artifact_generator/celestia_template.png";
 import {GenshinStyles} from "../../../../theme";
 import axios from "axios";
 import {getCroppedImg} from "./imgProcess";

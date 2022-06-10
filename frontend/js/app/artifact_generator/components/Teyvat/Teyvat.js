@@ -4,7 +4,7 @@ import {Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGrou
 import {GenshinStyles} from "../../../../theme";
 import {ARTIFACT_POSITIONS, INITIAL_ARTI_CONFIG} from "./constants";
 import {getParsedArtiConfig, upperCase} from "./utils";
-import background from "../../../../../assets/images/erased_template.png";
+import background from "../../../../../assets/images/artifact_generator/erased_template.png";
 import {SImg} from "../../styles";
 import {useTranslation} from "react-i18next";
 import {FormikProvider, useFormik} from "formik";

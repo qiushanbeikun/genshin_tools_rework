@@ -8,7 +8,10 @@ from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
+    username = models.TextField(max_length=255, unique=True, default="")
     email = models.EmailField(max_length=255, unique=True)
+    genshin_server = models.TextField(max_length=255, blank=True)
+    genshin_uid = models.TextField(max_length=255, blank=True)
     is_staff = models.BooleanField(
         default=False, help_text=_("Designates whether the user can log into this admin " "site.")
     )
@@ -22,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
 
     objects = UserManager()
 
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = "username"
 
     def get_full_name(self):
         return self.email

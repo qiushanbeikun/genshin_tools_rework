@@ -40,7 +40,7 @@ export function Content(props) {
   };
 
   return (
-    <Grid item xs={6}>
+    <Grid item xs={6} key={props.title}>
       <Card sx={{m: "1em"}}>
         <CardActionArea>
           <StaticRLink to="/artifact_generator" style={{textDecoration: 'none'}}>

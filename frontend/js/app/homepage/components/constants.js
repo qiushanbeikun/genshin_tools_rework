@@ -1,4 +1,4 @@
-import generator_image from "../../../../assets/images/generator_profile.jpg"
+import generator_image from "../../../../assets/images/artifact_generator/generator_profile.jpg"
 
 export const HOME_PAGE_DOC = [
   {

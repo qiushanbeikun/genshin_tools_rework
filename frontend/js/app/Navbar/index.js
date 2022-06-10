@@ -9,7 +9,7 @@ import {Button} from "@mui/material";
 import {GenshinStyles} from "../../theme";
 import {useTranslation} from "react-i18next";
 import LangChange from "./langChange";
-import {AuthButtons, StyledAppBarLink, theme} from "./styles";
+import {AuthButtons, StyledAppBarLink} from "./styles";
 
 export default function ButtonAppBar() {
 
@@ -52,8 +52,8 @@ export default function ButtonAppBar() {
 
         <AuthButtons>
           <LangChange/>
-          <Button color="inherit" className={classes.root}>{t("sign_up")}</Button>
-          <Button color="inherit" className={classes.root}>{t("login")}</Button>
+          <StyledAppBarLink color="inherit" to="/signup" className={classes.root}>{t("sign_up")}</StyledAppBarLink>
+          <StyledAppBarLink color="inherit" to="login" className={classes.root}>{t("login")}</StyledAppBarLink>
         </AuthButtons>
 
       </Toolbar>

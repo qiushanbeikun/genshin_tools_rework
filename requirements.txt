@@ -18,3 +18,4 @@ psutil
 ipython
 sentry-sdk
 pillow
+djangorestframework-simplejwt
