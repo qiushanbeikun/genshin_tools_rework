@@ -1,14 +1,14 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
+from rest_framework_simplejwt.tokens import RefreshToken
 from common.models import IndexedTimeStampedModel
 
 from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
-    username = models.TextField(max_length=255, unique=True, default="")
+    username = models.TextField(max_length=255, unique=False, default="")
     email = models.EmailField(max_length=255, unique=True)
     genshin_server = models.TextField(max_length=255, blank=True)
     genshin_uid = models.TextField(max_length=255, blank=True)
@@ -28,11 +28,13 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
 
-    def get_full_name(self):
-        return self.email
-
-    def get_short_name(self):
-        return self.email
-
     def __str__(self):
         return self.email
+
+    def tokens(self):
+        refresh = RefreshToken.for_user(self)
+        return {
+            "refresh": str(refresh),
+            "access": str(refresh.access_token)
+        }
+

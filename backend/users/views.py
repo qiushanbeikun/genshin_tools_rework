@@ -13,3 +13,11 @@ def check_email(request):
     except ObjectDoesNotExist:
         return JsonResponse({"data": "true"})
     return JsonResponse({"data": "false"})
+
+
+# @api_view(['POST'])
+# def update_profile(request):
+#     data = request.data
+#     print(data)
+
+

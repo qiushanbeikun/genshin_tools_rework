@@ -1,28 +1,41 @@
 import {Avatar, Box, Button, Checkbox, FormControlLabel, Grid, Paper, TextField, Typography} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {ErrorMessage, FormikProvider, useFormik} from "formik";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Copyright from "./copyright";
 import * as React from "react";
 import {INITIAL_LOGIN_FIELDS} from "./constants";
 import {loginValidation} from "./validations";
 import {useStyles} from "./styles";
-
-
-const handleLogin = () => {
-
-}
+import axios from "axios";
+import authSlice from "../../../store/slices/auth";
+import {useDispatch} from "react-redux";
 
 export default function Login() {
-
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = (values) => {
+    console.log(values);
+    axios.post("/api/auth/login/", values).then((res) => {
+      console.log(res);
+      dispatch(
+        authSlice.actions.setAuthTokens({
+          token: res.data.access,
+          refreshToken: res.data.refresh,
+        })
+      );
+      dispatch(authSlice.actions.setAccount(res.data.user));
+      navigate("/");
+    })
+  }
 
   const formik = useFormik({
     initialValues: INITIAL_LOGIN_FIELDS,
     onSubmit: handleLogin,
     validationSchema: loginValidation,
   })
-
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -49,8 +62,11 @@ export default function Login() {
               <Button type="submit" fullWidth variant="contained" color="primary">Login</Button>
 
               <Box my={1.5}>
-                <Link to="/signup" variant="body2" target="_blank">
+                <Link to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
+                </Link>
+                <Link to="/recovery" variant="body2">
+                  {"Forgot Password"}
                 </Link>
               </Box>
 

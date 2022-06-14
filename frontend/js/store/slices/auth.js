@@ -1,3 +1,4 @@
+// @flow
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AccountResponse } from "../types/types";
 
@@ -7,7 +8,7 @@ type State = {
   account: AccountResponse | null;
 };
 
-const initialState: State = { token: null, refreshToken: null, account: null };
+const initialState = { token: null, refreshToken: null, account: null };
 
 const authSlice = createSlice({
   name: "auth",

@@ -34,7 +34,7 @@ export default function Signup() {
     console.log(values);
     axios.post("/api/auth/register/", values).then((res) => {
       console.log(res)
-      alert("Sign Up succeed");
+      alert("Sign Up succeed, will");
       setTimeout(() => {
         navigate("/login");
       }, 2000)
@@ -89,7 +89,7 @@ export default function Signup() {
               <Button type="submit" fullWidth variant="contained" color="primary">Sign Up</Button>
 
               <Box my={1.5}>
-                <Link to="/recovery" variant="body2" target="_blank">
+                <Link to="/login" variant="body2">
                   {"Already have an account? Login"}
                 </Link>
               </Box>

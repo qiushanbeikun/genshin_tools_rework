@@ -1,8 +1,9 @@
 const en = {
   navbar: {
     home: "Home",
-    sign_up: "Sign Up",
-    login: "Login",
+    sign_up: "SIGN UP",
+    login: "LOGIN",
+    log_out: "LOG OUT",
     artifact_generator: "Artifact Generator",
     damage_calculator: "Damage Calculator",
     others: "Others",

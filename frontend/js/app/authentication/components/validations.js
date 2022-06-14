@@ -6,7 +6,7 @@ import qs from "query-string";
 
 export const signUpValidation = () => yup.object({
   username: yup.string().trim().required("Username is required")
-    .min(4, "Username at least 4 characters"),
+    .min(4, "Username requires at least 4 characters."),
   email: yup.string().trim().email("Please check email").required("Email is required")
     // .test("email availability", "Email address already used", async (email) => {
     //   console.log(email)
@@ -30,6 +30,11 @@ const emailValidationApi = async (email) => {
 
 
 export const loginValidation = () => yup.object({
-  username: yup.string().trim().required("Username is required"),
+  password: yup.string().trim().required("Password is required"),
   email: yup.string().trim().email("Please check email").required("Email is required")
+})
+
+export const profileValidation = () => yup.object({
+  username: yup.string().required("Username is required")
+    .min(4, "Username requires at least 4 characters.")
 })

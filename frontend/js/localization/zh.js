@@ -3,6 +3,7 @@ const zh = {
     home: "主页",
     sign_up: "注册",
     login: "登录",
+    log_out: "退出登录",
     artifact_generator: "圣遗物生成器",
     damage_calculator: "边际伤害计算",
     others: "其他",

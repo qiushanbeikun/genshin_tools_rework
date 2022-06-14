@@ -15,7 +15,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
-    "@babel/cli": "~7.13.10",
+    "@babel/cli": "^7.17.10",
     "@babel/polyfill": "~7.8.3",
     "@babel/preset-env": "~7.13.10",
     "@babel/preset-react": "~7.12.13",
@@ -76,8 +76,9 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "~7.13.10",
+    "@babel/core": "^7.18.2",
     "@babel/node": "~7.13.10",
+    "@babel/preset-flow": "^7.17.12",
     "@hot-loader/react-dom": "~16.14.0",
     "ajv": "~6.12.6",
     "babel-core": "~7.0.0-bridge.0",

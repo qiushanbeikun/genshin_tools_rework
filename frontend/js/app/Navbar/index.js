@@ -9,12 +9,16 @@ import {Button} from "@mui/material";
 import {GenshinStyles} from "../../theme";
 import {useTranslation} from "react-i18next";
 import LangChange from "./langChange";
-import {AuthButtons, StyledAppBarLink} from "./styles";
+import {StyledAppBarLink} from "./styles";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
+import AuthButtons from "./authButtons";
 
 export default function ButtonAppBar() {
 
   const classes = GenshinStyles();
   const {t} = useTranslation("navbar");
+
 
   return (
     <AppBar position="relative">
@@ -50,11 +54,7 @@ export default function ButtonAppBar() {
           </Typography>
         </>
 
-        <AuthButtons>
-          <LangChange/>
-          <StyledAppBarLink color="inherit" to="/signup" className={classes.root}>{t("sign_up")}</StyledAppBarLink>
-          <StyledAppBarLink color="inherit" to="login" className={classes.root}>{t("login")}</StyledAppBarLink>
-        </AuthButtons>
+        <AuthButtons/>
 
       </Toolbar>
     </AppBar>

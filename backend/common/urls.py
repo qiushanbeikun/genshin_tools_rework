@@ -1,14 +1,8 @@
 from django.urls import path
 from . import views
 
+paths = ['', 'damage_calculator', 'signup', 'login', 'recovery', 'profile']
+
 app_name = 'common'
 # front end views
-urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    # todo: these urls should be put into individual apps
-    path('damage_calculator', views.IndexView.as_view()),
-    path('others', views.IndexView.as_view()),
-    path('signup', views.IndexView.as_view()),
-    path('login', views.IndexView.as_view()),
-    path('recovery', views.IndexView.as_view()),
-]
+urlpatterns = [path(x, views.IndexView.as_view()) for x in paths]

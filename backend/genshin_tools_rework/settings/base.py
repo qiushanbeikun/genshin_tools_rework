@@ -1,5 +1,3 @@
-# https://docs.djangoproject.com/en/1.10/ref/settings/
-
 import os
 
 from decouple import config  # noqa
@@ -97,11 +95,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTTokenUserAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 LANGUAGE_CODE = "en-us"
 
@@ -140,6 +143,7 @@ COMMIT_SHA = config("HEROKU_SLUG_COMMIT", default="")
 # https://github.com/vintasoftware/safari-samesite-cookie-issue
 CSRF_COOKIE_SAMESITE = None
 SESSION_COOKIE_SAMESITE = None
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

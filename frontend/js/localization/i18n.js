@@ -29,6 +29,6 @@ i18n
     react: {
       wait: true
     }
-  }).then(r => console.log("i18n", r));
+  }).then(() => {});
 
 export default i18n;
