@@ -29,6 +29,7 @@ export default function Login() {
       dispatch(authSlice.actions.setAccount(res.data.user));
       navigate("/");
     })
+      .catch(e => alert("账号已封禁，若疑为误封，请邮件联系作者。"))
   }
 
   const formik = useFormik({

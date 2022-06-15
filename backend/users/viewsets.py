@@ -1,6 +1,6 @@
 from .serializers import UserSerializer, UpdateSerializer
 from .models import User
-from rest_framework import viewsets
+from rest_framework import viewsets, views, generics, mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
 from rest_framework import status
@@ -28,24 +28,19 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return obj
 
+    # def partial_update(self, request, *args, **kwargs):
+    #     print(request.data)
+    #     kwargs["partial"] = True
+    #     return self.update(request,  *args, **kwargs)
 
-class UpdateViewSet(viewsets.ViewSet):
+
+class UpdateUserViewSet(viewsets.ModelViewSet):
     serializer_class = UpdateSerializer
-    http_method_names = ['post']
+    http_method_names = ['post', 'put', 'patch']
     permission_classes = (IsAuthenticated,)
-    # authentication_classes = (JWTTokenUserAuthentication,)
     queryset = User.objects.all()
-    lookup_field = "pk"
 
-    def list(self, request, project_pk=None):
-        queryset = self.queryset.filter(project__name=project_pk)
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
-
-    def partial_update(self, request, *args, **kwargs):
-        instance = self.queryset.get(id=request.data["id"])
-        print("@#@#@#@#@#@#@#")
-        serializer = self.serializer_class(instance, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # def update(self, request, *args, **kwargs):
+    #     print(request.data)
+    #
+    #     return Response(status=status.HTTP_200_OK)

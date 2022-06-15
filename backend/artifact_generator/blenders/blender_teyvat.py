@@ -31,18 +31,6 @@ def generate_teyvat(config):
     background.save(buffer, format='PNG')
     return base64.b64encode(buffer.getvalue())
 
-
-# title = 'whatever123'
-#
-# position = '时之沙'
-# main_prop = '元素充能效率'
-# main_prop_rate = '51.8%'
-#
-# vice_one = '暴击率+1433.1%'
-# vice_two = '暴击伤害+22125.8%'
-# vice_three = '攻击力+53332.4%'
-# vice_four = '生命值+4113.5%'
-
 # title = '大氵逼的帖子'
 # position = '时之沙'
 # main_prop = '水贴效率'

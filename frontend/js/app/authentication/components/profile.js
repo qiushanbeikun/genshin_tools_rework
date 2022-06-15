@@ -6,42 +6,48 @@ import type {RootState} from "../../../store";
 import {profileValidation} from "./validations";
 import {Box, Button, Grid, TextField} from "@mui/material";
 import Copyright from "./copyright";
+import {fetcher} from "../../../utils/axios";
+import useSWR from 'swr';
+import {useEffect} from "react";
+import store from "../../../store";
+import authSlice from "../../../store/slices/auth";
+
+const handleUpdate = (values, headers) => {
+  const payload = {
+    id: values.id,
+    username: values.username,
+  }
+  if (!!values.genshin_server) {
+    payload["genshin_server"] = values.genshin_server
+  }
+  if (!!values.genshin_uid) {
+    payload["genshin_uid"] = values.genshin_uid
+  }
+
+  axios.post(`/api/auth/update/`, values, {headers: headers}).then((res) => {
+    store.dispatch(authSlice.actions.setAccount(res.data))
+  })
+}
 
 export default function Profile() {
 
   const auth = useSelector((state: RootState) => state.auth);
   const headers = {
-    Authorization: auth.token ? `JWT ${auth.token}` : null,
+    Authorization: auth.token ? `Bearer ${auth.token}` : null,
   }
+  const userId = auth.account?.id;
 
-  const handleUpdate = (values) => {
-    const payload = {
-      id: values.id,
-      username: values.username,
-    }
-    if (!!values.genshin_server) {
-      payload["genshin_server"] = values.genshin_server
-    }
-    if (!!values.genshin_uid) {
-      payload["genshin_uid"] = values.genshin_uid
-    }
-
-    console.log(payload);
-    axios.post(`/api/auth/update/`, values, {headers: headers}).then((res) => {
-      console.log(res);
-    })
-  }
+  // useSWR(`/api/auth/verify/`, fetcher);
 
   const formik = useFormik({
     initialValues: {
       id: auth.account.id,
-      username: "",
       email: auth.account.email,
-      genshin_server: "",
-      genshin_uid: "",
-      password: "12341234",
+      username: auth.account.username,
+      genshin_server: auth.account.genshin_server,
+      genshin_uid: auth.account.genshin_uid,
     },
-    onSubmit: handleUpdate,
+    onSubmit: () => handleUpdate(formik.values, headers),
     validationSchema: profileValidation,
   });
 
@@ -66,10 +72,9 @@ export default function Profile() {
                          value={formik.values.genshin_uid} onBlur={formik.handleBlur}
                          onChange={formik.handleChange}/>
 
-              <Button type="submit" fullWidth variant="contained" color="primary" sx={{my: 1}} disabled>Update (WIP)</Button>
+              <Button type="submit" fullWidth variant="contained" color="primary" sx={{my: 1}}>Update</Button>
 
-              <Button fullWidth variant="contained" color="warning" sx={{my: 1}}>Change PW (WIP)</Button>
-
+              <Button fullWidth variant="contained" color="warning" sx={{my: 1}} disabled>Change PW (WIP)</Button>
 
             </form>
           </FormikProvider>
@@ -84,7 +89,5 @@ export default function Profile() {
         <Copyright/>
       </Box>
     </Box>
-
-
   )
 }

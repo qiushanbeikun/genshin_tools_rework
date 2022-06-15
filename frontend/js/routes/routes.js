@@ -6,6 +6,7 @@ import Signup from "../app/authentication/components/signup";
 import Login from "../app/authentication/components/login";
 import Profile from "../app/authentication/components/profile";
 import {LoginOverride, LoginRequiredRoute} from "./protectedRoutes";
+import AddArtifact from "../app/artifact_generator/components/AddArtifact/addArtifact";
 
 export default function MyRoutes() {
   return (
@@ -16,6 +17,7 @@ export default function MyRoutes() {
       <Route exact path="/login" element={<LoginOverride><Login/></LoginOverride>}/>
       <Route exact path="/recovery" element={<Signup/>}/>
       <Route exact path="/profile" element={<LoginRequiredRoute><Profile/></LoginRequiredRoute>}/>
+      <Route exact path="/upload_artifact" element={<AddArtifact/>}/>
     </Routes>
   )
 }

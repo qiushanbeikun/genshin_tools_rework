@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-paths = ['', 'damage_calculator', 'signup', 'login', 'recovery', 'profile']
+paths = ['', 'damage_calculator', 'signup', 'login', 'recovery', 'profile', 'upload_artifact']
 
 app_name = 'common'
 # front end views

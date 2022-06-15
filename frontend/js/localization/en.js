@@ -30,7 +30,6 @@ const en = {
     preview_photo: "Preview Photo",
     modify_crop: "Modify Crop",
     clear: "Clear Fields",
-
   },
   artifact_props: {
     atk: "ATK",

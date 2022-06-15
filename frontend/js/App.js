@@ -10,7 +10,7 @@ import {PersistGate} from "redux-persist/integration/react";
 import {Router} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import {createTheme, ThemeProvider} from "@mui/material";
-import MyRoutes from "./routes";
+import MyRoutes from "./routes/routes";
 import ButtonAppBar from "./app/Navbar/index";
 export function App() {
 

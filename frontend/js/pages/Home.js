@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "@emotion/styled";
 import Navbar from '../app/Navbar/index';
-import MyRoutes from "../routes";
+import MyRoutes from "../routes/routes";
 import {ThemeProvider, createTheme} from "@mui/material";
 import {BrowserRouter} from "react-router-dom";
 
