@@ -17,7 +17,6 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = (values) => {
-    console.log(values);
     axios.post("/api/auth/login/", values).then((res) => {
       console.log(res);
       dispatch(
@@ -27,7 +26,7 @@ export default function Login() {
         })
       );
       dispatch(authSlice.actions.setAccount(res.data.user));
-      navigate("/");
+      // navigate("/");
     })
       .catch(e => alert("账号已封禁，若疑为误封，请邮件联系作者。"))
   }

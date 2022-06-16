@@ -1,8 +1,18 @@
 import * as React from "react";
-import {useState} from "react";
-import {Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup} from "@mui/material";
+import {useEffect, useState} from "react";
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  InputLabel, MenuItem,
+  Radio,
+  RadioGroup,
+  Select
+} from "@mui/material";
 import {GenshinStyles} from "../../../../theme";
-import {ARTIFACT_POSITIONS, INITIAL_ARTI_CONFIG} from "./constants";
+import {ARTIFACT_POSITIONS, INITIAL_ARTI_CONFIG, POSITION_CONSTRAINTS} from "./constants";
 import {getParsedArtiConfig, upperCase} from "./utils";
 import background from "../../../../../assets/images/artifact_generator/erased_template.png";
 import {SImg} from "../../styles";
@@ -12,16 +22,20 @@ import {MainPropSelect} from "./mainPropSelect";
 import {VicePropRow} from "./vicePropRow";
 import axios from "axios";
 import BtnGroup from "../btnGroup";
+import qs from "query-string";
 
 export default function Teyvat() {
 
   const classes = GenshinStyles();
-  const {t} = useTranslation("generator_ui");
+  const {t, i18n} = useTranslation("generator_ui");
+  const [setNames, setSetNames] = useState([]);
   const [artifact, setArtifact] = useState();
+  const language = i18n.language
 
   const handleSubmit = (values) => {
     console.log(values);
-    const artiConfig = getParsedArtiConfig(values);
+    const selectedSetName = setNames[values.artiSet];
+    const artiConfig = getParsedArtiConfig(values, selectedSetName);
     axios.post("/artifact_generator/teyvat/", artiConfig).then((res) => {
       setArtifact(res.data.data);
     })
@@ -32,22 +46,36 @@ export default function Teyvat() {
     onSubmit: handleSubmit,
   })
 
+  useEffect(() => {
+    axios.get(`/artifact_generator/get_set_names/?${qs.stringify({lang:language})}`).then(res => {
+      console.log(res.data)
+      setSetNames(res.data);
+    })
+  }, [])
+
 
   return (
     <FormikProvider value={formik}>
       <Grid container spacing={1} className={classes.root}>
-        <Grid item xs={6}>
+        <Grid item xs={7}>
           <h4>{t("editor")}</h4>
-
           <form onSubmit={formik.handleSubmit}>
-
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" sx={{m: 1, width: "80%"}}>
               <FormLabel component="legend" className={classes.root}>{t("artifact_position")}</FormLabel>
               <RadioGroup row name="position" value={formik.values.position} onChange={formik.handleChange}>
                 {ARTIFACT_POSITIONS.map((pos) =>
                   <FormControlLabel value={pos} control={<Radio/>} className={classes.root} label={upperCase(pos)}/>
                 )}
               </RadioGroup>
+            </FormControl>
+
+            <FormControl sx={{m: 1, width: "80%"}}>
+              <InputLabel>圣遗物套装选择</InputLabel>
+              <Select value={formik.values.artiSet} onChange={formik.handleChange} name="artiSet">
+                {setNames.length!==0 && setNames.map((each, index) => (
+                  <MenuItem key={each} value={index}>{each}</MenuItem>
+                ))}
+              </Select>
             </FormControl>
 
             <MainPropSelect name="main_prop"/>
@@ -60,7 +88,7 @@ export default function Teyvat() {
           </form>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <h4>{t("artifact_screenshot")}</h4>
           {!!artifact ? <SImg src={`data:image/png;base64,${artifact}`}/> : <SImg src={background}/>}
         </Grid>

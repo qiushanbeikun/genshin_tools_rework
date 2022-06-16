@@ -56,13 +56,13 @@ export const POSITION = {
   'head': i18n.t("artifact_positions:head"),
 }
 
-export const ARTIFACT_NAMES = {
-  'flower': '明威之镡',
-  'feather': '切落之羽',
-  'sand': '雷云之笼',
-  'cup': '绯花之壶',
-  'head': '华饰之兜',
-}
+// export const ARTIFACT_NAMES = {
+//   'flower': '明威之镡',
+//   'feather': '切落之羽',
+//   'sand': '雷云之笼',
+//   'cup': '绯花之壶',
+//   'head': '华饰之兜',
+// }
 
 
 
@@ -109,6 +109,7 @@ export const INITIAL_VICE_PROPS = [
 ]
 
 export const INITIAL_ARTI_CONFIG = {
+  artiSet: 0,
   position: ARTIFACT_POSITIONS[0],
   main_prop: DEFAULT_MAIN_PROP,
   vice_props: INITIAL_VICE_PROPS,

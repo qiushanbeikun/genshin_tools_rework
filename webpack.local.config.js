@@ -14,7 +14,7 @@ baseConfig.entry = [
   'react-hot-loader/patch',
   'whatwg-fetch',
   '@babel/polyfill',
-  './frontend/js/routes.js',
+  './frontend/js/index.js',
 ];
 
 baseConfig.optimization = {

@@ -6,6 +6,7 @@ import Celestia from "./components/Celestia/Celestia";
 import Teyvat from "./components/Teyvat/Teyvat";
 import {ModeSelector} from "./styles";
 import {useTranslation} from "react-i18next";
+import Artifact from "./components/Artifact";
 
 export const Workshop = ({g_mode}) => {
 
@@ -32,11 +33,22 @@ export const Workshop = ({g_mode}) => {
         <ToggleButtonGroup color="primary" value={mode} exclusive onChange={handleModeChange}>
           <ToggleButton value="teyvat" className={classes.root}>{t("teyvat")}</ToggleButton>
           <ToggleButton value="celestia" className={classes.root}>{t("celestia")}</ToggleButton>
+          <ToggleButton value="artifact" className={classes.root}>天理</ToggleButton>
         </ToggleButtonGroup>
       </ModeSelector>
       <Box sx={{m: "1em"}}>
-        {mode === "teyvat" ? <Teyvat/> : <Celestia/>}
+        {/*{mode === "teyvat" ? <Teyvat/> : <Celestia/>}*/}
+        <GeneratorPage mode={mode} />
       </Box>
     </Box>
   )
+}
+
+function GeneratorPage({mode}) {
+  switch (mode) {
+    default:
+    case "teyvat": return <Teyvat/>
+    case "celestia": return <Celestia/>
+    case "artifact": return <Artifact/>
+  }
 }

@@ -17,7 +17,8 @@ export default function MyRoutes() {
       <Route exact path="/login" element={<LoginOverride><Login/></LoginOverride>}/>
       <Route exact path="/recovery" element={<Signup/>}/>
       <Route exact path="/profile" element={<LoginRequiredRoute><Profile/></LoginRequiredRoute>}/>
-      <Route exact path="/upload_artifact" element={<AddArtifact/>}/>
+      <Route exact path="/upload_artifact/" element={<AddArtifact/>}/>
+      <Route exact path="/upload_artifact/:id" element={<AddArtifact/>}/>
     </Routes>
   )
 }

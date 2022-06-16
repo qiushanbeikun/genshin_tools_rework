@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from "react-router-dom";
-import {Button} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import {GenshinStyles} from "../../theme";
 import {useTranslation} from "react-i18next";
 import LangChange from "./langChange";
@@ -18,7 +18,6 @@ export default function ButtonAppBar() {
 
   const classes = GenshinStyles();
   const {t} = useTranslation("navbar");
-
 
   return (
     <AppBar position="relative">

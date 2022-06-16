@@ -1,99 +1,131 @@
 import * as React from "react";
-import {Box, Grid, TextField, Typography} from "@mui/material";
+import {Box, Button, Grid, TextField, Typography} from "@mui/material";
 import {FormikProvider, useFormik} from "formik";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import type {RootState} from "../../../../store";
-import {INDEX_TO_NAME_POSITION, INITIAL_FORM_VALUE} from "./constants";
+import {INITIAL_FORM_VALUE} from "./constants";
 import PositionInput from "./positionInput";
+import {useNavigate, useParams} from "react-router-dom";
+import BtnGroup from "../btnGroup";
+import Desc from "./desc";
+import {useEffect} from "react";
+import axios from "axios";
+import qs from "query-string";
+import i18n from "../../../../localization/i18n";
 
+
+const handleDelete = (id) => {
+  axios.delete(`/artifact_generator/delete/?id=${id}`).then(res => console.log("not implemented"))
+}
 
 export default function AddArtifact() {
 
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const auth = useSelector((state: RootState) => state.auth);
+  const {id} = useParams();
+  const navigate = useNavigate();
+  const language = i18n.language;
 
-  const handleSubmit = (values) => {
+  const headers = {
+    Authorization: auth.token ? `Bearer ${auth.token}` : null,
+  }
+
+  const handleSubmit = (values, language) => {
     const payload = {...values};
     payload.contributor = auth.account.email;
-    const headers = {Authorization: auth.token ? `JWT ${auth.token}` : null}
-    console.log(payload, headers);
+    payload.language = language;
+    axios.post("/artifact_generator/add_artifact/", payload, {headers: headers}).then(res => {
+      console.log(res);
+      // alert(id ? 'Upload succeed.' : 'Update succeed')
+    })
   }
 
   const formik = useFormik({
     initialValues: INITIAL_FORM_VALUE,
-    onSubmit: handleSubmit,
+    onSubmit: (values) => handleSubmit(values, language),
+  });
 
-  })
+  useEffect(() => {
+    id && axios.get(`/artifact_generator/artifact/?${qs.stringify({
+      id: id,
+      lang: language
+    })}`, {headers: headers}).then(res => {
+      const data = res.data[0];
+      console.log(data)
+      formik.setFieldValue("title", data.title)
+      formik.setFieldValue("names", [data.flower, data.feather, data.glass, data.cup, data.head]);
+      formik.setFieldValue("img_path", data.img_path);
+      formik.setFieldValue("two_set_buff", data.two_set_buff);
+      formik.setFieldValue("four_set_buff", data.four_set_buff);
+      formik.setFieldValue("descs",
+        [data.flower_desc, data.feather_desc, data.glass_desc, data.cup_desc, data.head_desc]);
+    })
+  }, [])
 
   return (
     <Box maxWidth="lg" sx={{m: "1em auto"}}>
       <Grid container spacing={2}>
         <Grid item xs={8}>
           <FormikProvider value={formik}>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <Typography variant="h4" paragraph>Properties</Typography>
                 </Grid>
-                <>
+                <Grid item xs={3}>
+                  Title
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField value={formik.values.title} name="title" onChange={formik.handleChange} fullWidth
+                             variant="standard"/>
+                </Grid>
 
-                  <Grid item xs={3}>
-                    Title
-                  </Grid>
-                  <Grid item xs={7}>
-                    <TextField value={formik.values.title} name="title" onChange={formik.handleChange}
-                               variant="standard"/>
-                  </Grid>
-                  {[0, 1, 2, 3, 4].map((index) => <PositionInput index={index}/>)}
+                {[0, 1, 2, 3, 4].map((index) => <PositionInput index={index} target="name"/>)}
+                {[0, 1, 2, 3, 4].map((index) => <PositionInput index={index} target="desc"/>)}
 
-                  <Grid item xs={3}>
-                    2-Set Bonus
-                  </Grid>
-                  <Grid item xs={7}>
-                    <TextField value={formik.values.two_set_buff} name="title" onChange={formik.handleChange}
-                               variant="standard" multiline rows={3}/>
-                  </Grid>
-                  <Grid item xs={3}>
-                    4-Set Bonus
-                  </Grid>
-                  <Grid item xs={7}>
-                    <TextField value={formik.values.four_set_buff} name="title" onChange={formik.handleChange}
-                               variant="standard" multiline rows={3}/>
-                  </Grid>
-                  <Grid item xs={3}>
-                    Description
-                  </Grid>
-                  <Grid item xs={7}>
-                    <TextField value={formik.values.desc} name="title" onChange={formik.handleChange} variant="standard"
-                               multiline rows={3}/>
-                  </Grid>
-                </>
-
+                <Grid item xs={3}>
+                  Image Path
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField value={formik.values.img_path} name="img_path" onChange={formik.handleChange}
+                             fullWidth variant="standard"/>
+                </Grid>
+                <Grid item xs={3}>
+                  2-Set Bonus
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField value={formik.values.two_set_buff} name="two_set_buff" onChange={formik.handleChange}
+                             fullWidth variant="standard" multiline rows={2}/>
+                </Grid>
+                <Grid item xs={3}>
+                  4-Set Bonus
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField value={formik.values.four_set_buff} name="four_set_buff" onChange={formik.handleChange}
+                             fullWidth variant="standard" multiline rows={3}/>
+                </Grid>
               </Grid>
-              
+
+              <Box sx={{m: "1em", textAlign: "center"}}>
+                <Button variant="contained" type="submit">
+                  {!!id ? "Update Template" : "Upload Template"}
+                </Button>
+
+                <Button variant="contained" color="error" onClick={() => formik.handleReset}>
+                  {i18n.t("generator_ui:clear")}
+                </Button>
+                {auth.account.is_superuser &&
+                <Button variant="contained" color="error" onClick={() => handleDelete}>
+                  Delete
+                </Button>
+                }
+              </Box>
+
             </form>
           </FormikProvider>
         </Grid>
-
-        <Grid item xs={4}>
-          <h3>Description</h3>
-          <Typography paragraph>
-            圣遗物上传说明
-          </Typography>
-
-          <Typography paragraph>
-            由于已经有其他网站拥有完备的圣遗物图片，本站计划套用该网站的图片，因此暂时关闭本站上传通道.
-          </Typography>
-
-          <Typography paragraph>
-            圣遗物为多人共同修改，由管理员审核后会开放使用。所有参与了编辑圣遗物的用户都会列于“贡献名单”中。
-          </Typography>
-
-          <Typography paragraph>
-            仅注册会员可以添加/修改圣遗物模板。请勿恶意修改，后台由自动程序监控，发现后会自动封号。
-          </Typography>
-        </Grid>
+        <Desc/>
       </Grid>
     </Box>
   )

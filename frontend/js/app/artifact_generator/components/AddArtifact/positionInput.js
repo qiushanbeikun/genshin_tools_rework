@@ -4,25 +4,28 @@ import {useFormikContext} from "formik";
 import {Fragment} from "react";
 import {INDEX_TO_NAME_POSITION} from "./constants";
 
-export default function PositionInput({index}) {
+export default function PositionInput({index, target}) {
 
-  const {values: {names, images}, setFieldValue, handleChange} = useFormikContext();
+  const {values: {names, descs}, handleChange} = useFormikContext();
 
-  const handleImgUpload = async (e) => {
-    // image must be square, >= 256*256 and <= 1024*1024
+  const targetField = (target === "name") ? names : descs;
 
-  }
 
   return (
-    // for now, image uploads are disable as
     <Fragment key={index}>
-      <Grid item xs={3}>{INDEX_TO_NAME_POSITION[index]}</Grid>
-      <Grid item xs={5}>
-        <TextField name={`names[${index}]`} value={names[index]} onChange={handleChange} variant="standard"/>
+      <Grid item xs={3}>{INDEX_TO_NAME_POSITION[index]} {target}</Grid>
+      <Grid item xs={8}>
+        {(target === "name") ?
+          <TextField name={`names[${index}]`} value={names[index]} onChange={handleChange} variant="standard"
+                     fullWidth/>
+          :
+          <TextField name={`descs[${index}]`} value={descs[index]} onChange={handleChange} variant="standard"
+                     fullWidth multiline rows={2}/>
+        }
       </Grid>
-      <Grid item xs={4}>
-        <input type="file" accept="image/*" id="select_artifact_img" onChange={handleImgUpload} disabled/>
-      </Grid>
+      {/*<Grid item xs={4}>*/}
+      {/*  <input type="file" accept="image/*" id="select_artifact_img" onChange={handleImgUpload} disabled/>*/}
+      {/*</Grid>*/}
     </Fragment>
   )
 }

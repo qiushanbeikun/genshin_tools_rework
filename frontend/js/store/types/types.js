@@ -16,8 +16,8 @@ export interface AccountResponse {
   refresh: string;
 }
 
-export interface AccountUpdate {
-  username: string;
-  genshin_uid: string;
-  genshin_server: string;
-}
+// export interface AccountUpdate {
+//   username: string;
+//   genshin_uid: string;
+//   genshin_server: string;
+// }

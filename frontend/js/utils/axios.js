@@ -56,5 +56,6 @@ const refreshAuth = async (failedRequest) => {
 createAuthRefreshInterceptor(axiosService, refreshAuth);
 
 export function fetcher(url) {
+  console.log(store.getState().auth.token)
   return axiosService.post(url, {token: store.getState().auth.token}).then((res) => res.data);
 }

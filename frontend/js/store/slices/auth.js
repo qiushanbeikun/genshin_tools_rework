@@ -1,6 +1,6 @@
 // @flow
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {AccountResponse, AccountUpdate} from "../types/types";
+import {AccountResponse} from "../types/types";
 
 type State = {
   token: string | null;
@@ -28,12 +28,7 @@ const authSlice = createSlice({
       state.account = null;
       state.refreshToken = null;
       state.token = null;
-    },
-    // updateAccount(state: State, action:PayloadAction<AccountUpdate>) {
-    //   state.account.user = action.payload.username;
-    //   state.account.user.genshin_server = action.payload.genshin_server;
-    //   state.account.user.genshin_uid = action.payload.genshin_uid;
-    // }
+    }
   },
 });
 

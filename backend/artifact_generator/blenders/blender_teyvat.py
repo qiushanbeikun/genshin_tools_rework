@@ -1,7 +1,8 @@
 import base64
-from PIL import Image, ImageFont, ImageDraw
+from PIL import ImageDraw
 from io import BytesIO
 from .utils import *
+from ..models import ArtifactDesc
 
 
 def generate_teyvat(config):
@@ -9,8 +10,11 @@ def generate_teyvat(config):
     print(config)
 
     # todo: make name const at this moment, support of other artifacts are in future releases
-    name = "绝缘之旗印"
-    artifact_img = get_arti_image(config['position'], name)
+    title = config['artiSet']
+    template = ArtifactDesc.objects.get(title=title)
+    dirname = template.img_path
+    position_name = template.flower
+    artifact_img = get_arti_image(config['position'], dirname)
     artifact_img = artifact_img.resize((TEYVAT_PHOTO_SIZE, TEYVAT_PHOTO_SIZE))
 
     background.paste(artifact_img, (341, 73), artifact_img)

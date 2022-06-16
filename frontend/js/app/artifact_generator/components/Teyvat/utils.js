@@ -77,17 +77,18 @@ export function getNewUsedProps(curUsedProps, curIdx, prevIdx) {
   return res;
 }
 
-export function getParsedArtiConfig(artiConfig) {
+export function getParsedArtiConfig(artiConfig, selectedSetName) {
   const VICE_NAMES = ['viceOne', 'viceTwo', 'viceThree', 'viceFour'];
   const position = artiConfig.position;
   const constraints = POSITION_CONSTRAINTS[position];
   const mainPropName = constraints[artiConfig.main_prop];
   let res = {
-    "title": ARTIFACT_NAMES[position],
+    // "title": ARTIFACT_NAMES[position],
     "position": position,
     "position_name": POSITION[position],
     "mainProp": propNameParser(mainPropName),
     'mainPropRate': getMainPropRate(mainPropName),
+    "artiSet": selectedSetName,
   }
   VICE_NAMES.map((name, index) => {
     const ctx = artiConfig.vice_props[index];

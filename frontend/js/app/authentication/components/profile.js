@@ -37,7 +37,7 @@ export default function Profile() {
   }
   const userId = auth.account?.id;
 
-  // useSWR(`/api/auth/verify/`, fetcher);
+  useSWR(`/api/auth/verify/`, fetcher);
 
   const formik = useFormik({
     initialValues: {

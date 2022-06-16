@@ -3,11 +3,11 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
-        fields = "__all__"
-        # read_only_field = ['is_active', 'created']
+        fields = ["id", "email", "username", "is_active", "is_superuser", "genshin_server", "genshin_uid", "created",
+                  "modified", "last_login"]
+        read_only_field = ['is_active', 'created']
 
     # def update(self, instance, validated_data):
     #     print("cao ni ma de bi")
@@ -35,7 +35,7 @@ class UpdateSerializer(serializers.ModelSerializer):
     #     instance.genshin_server = validated_data['genshin_server']
     #     instance.genshin_uid = validated_data['genshin_uid']
     #     instance.save()
-        # return instance
+    # return instance
     # def update(self, instance, validated_data):
     #     instance.username = validated_data.get("username")
     #     instance.genshin_server = validated_data.get("genshin_server")

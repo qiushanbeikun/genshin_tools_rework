@@ -1,24 +1,11 @@
 export const INITIAL_FORM_VALUE = {
   title: "",
-  // names: {
-  //   flower: "",
-  //   feather: "",
-  //   glass: "",
-  //   cup: "",
-  //   head: "",
-  // },
-  names: ['','','','',''],
-  // images: {
-  //   flower_image: "",
-  //   feather_image: "",
-  //   glass_image: "",
-  //   cup_image: "",
-  //   head_image: "",
-  // },
-  // images: ['','','','',''],
+  names: ['', '', '', '', ''],
+  descs: ['', '', '', '', ''],
+  img_path: "",
   two_set_buff: "",
-  four_set_buffL: "",
-  desc: ""
+  four_set_buff: "",
+
 }
 
 export const NAME_TO_DISPLAY_TEXT = {}

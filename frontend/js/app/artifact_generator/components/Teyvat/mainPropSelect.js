@@ -26,7 +26,7 @@ export function MainPropSelect(props) {
   }
 
   return (
-    <FormControl sx={{m: 1, minWidth: 120}}>
+    <FormControl sx={{m: 1, width: "80%"}}>
       <InputLabel id="demo-simple-select-helper-label" className={classes.root}>{t("main_property")}</InputLabel>
       <Select value={main_prop} onChange={handlePosChange} {...props}>
         {POSITION_CONSTRAINTS[position].map((each, index) => (
