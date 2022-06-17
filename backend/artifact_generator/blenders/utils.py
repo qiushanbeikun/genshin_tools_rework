@@ -16,7 +16,7 @@ def get_arti_image(pos, dirname):
 def pos_parser(pos):
     if pos == "head":
         return "goblet"
-    else: return pos
+    else : return pos
 
 
 def get_arti_position_name(template, position):
@@ -32,10 +32,24 @@ def get_arti_position_name(template, position):
         return template.head
 
 
+def get_arti_position_desc(template, position):
+    if position == "flower":
+        return template.flower_desc
+    if position == "feather":
+        return template.feather_desc
+    if position == "glass":
+        return template.glass_desc
+    if position == "cup":
+        return template.cup_desc
+    if position == "head":
+        return template.head_Desc
+
+
 def get_bases(background_file_name):
     background = Image.open(BACKGROUND_DIR + background_file_name).convert('RGBA')
     vice_font = ImageFont.truetype(ZN_FONT_DIR, 30)
     main_prop_font = ImageFont.truetype(ZN_FONT_DIR, 28)
     main_prop_rate_font = ImageFont.truetype(ZN_FONT_DIR, 55)
-    title_font = ImageFont.truetype(ZN_FONT_DIR, 43)
-    return background, vice_font, main_prop_font, main_prop_rate_font, title_font
+    header_font = ImageFont.truetype(ZN_FONT_DIR, 43)
+    title_font = ImageFont.truetype(ZN_FONT_DIR, 31)
+    return background, vice_font, main_prop_font, main_prop_rate_font, header_font, title_font

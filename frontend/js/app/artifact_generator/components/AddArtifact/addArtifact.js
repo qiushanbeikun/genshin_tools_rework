@@ -15,10 +15,6 @@ import qs from "query-string";
 import i18n from "../../../../localization/i18n";
 
 
-const handleDelete = (id) => {
-  axios.delete(`/artifact_generator/delete/?id=${id}`).then(res => console.log("not implemented"))
-}
-
 export default function AddArtifact() {
 
   const {t, i18n} = useTranslation();
@@ -41,25 +37,44 @@ export default function AddArtifact() {
     })
   }
 
+  /**
+   *
+   * @param id
+   * @param publish Note this publish here is the target state, if want to make release arti, it should be true
+   */
+  const handlePublish = (id, publish) => {
+    axios.post(`/artifact_generator/publish/`, {
+      id: id,
+      production: publish
+    }, {headers: headers}).then(res => formik.setFieldValue("production", res.data.production))
+  }
+
+  const handleDelete = (id) => {
+    alert("double check to delete")
+    axios.delete(`/artifact_generator/delete/${id}`, {headers: headers})
+      .then(res => console.log("not implemented"))
+  }
+
   const formik = useFormik({
     initialValues: INITIAL_FORM_VALUE,
     onSubmit: (values) => handleSubmit(values, language),
   });
 
+  const refreshArti = (data) => {
+    formik.setFieldValue("title", data.title)
+    formik.setFieldValue("names", [data.flower, data.feather, data.glass, data.cup, data.head]);
+    formik.setFieldValue("img_path", data.img_path);
+    formik.setFieldValue("two_set_buff", data.two_set_buff);
+    formik.setFieldValue("four_set_buff", data.four_set_buff);
+    formik.setFieldValue("descs",
+      [data.flower_desc, data.feather_desc, data.glass_desc, data.cup_desc, data.head_desc]);
+    formik.setFieldValue("production", data.production)
+  }
+
   useEffect(() => {
-    id && axios.get(`/artifact_generator/artifact/?${qs.stringify({
-      id: id,
-      lang: language
-    })}`, {headers: headers}).then(res => {
-      const data = res.data[0];
-      console.log(data)
-      formik.setFieldValue("title", data.title)
-      formik.setFieldValue("names", [data.flower, data.feather, data.glass, data.cup, data.head]);
-      formik.setFieldValue("img_path", data.img_path);
-      formik.setFieldValue("two_set_buff", data.two_set_buff);
-      formik.setFieldValue("four_set_buff", data.four_set_buff);
-      formik.setFieldValue("descs",
-        [data.flower_desc, data.feather_desc, data.glass_desc, data.cup_desc, data.head_desc]);
+    id && axios.get(`/artifact_generator/artifact/?${qs.stringify({id: id, lang: language})}`,
+      {headers: headers}).then(res => {
+      refreshArti(res.data[0])
     })
   }, [])
 
@@ -116,12 +131,17 @@ export default function AddArtifact() {
                   {i18n.t("generator_ui:clear")}
                 </Button>
                 {auth.account.is_superuser &&
-                <Button variant="contained" color="error" onClick={() => handleDelete}>
-                  Delete
-                </Button>
+                <>
+                  <Button variant="contained" color="error"
+                          onClick={() => handlePublish(id, !formik.values.production)}>
+                    {formik.values.production ? "Unpublished" : "Publish"}
+                  </Button>
+                  <Button variant="contained" color="error" onClick={() => handleDelete(id)}>
+                    Delete
+                  </Button>
+                </>
                 }
               </Box>
-
             </form>
           </FormikProvider>
         </Grid>

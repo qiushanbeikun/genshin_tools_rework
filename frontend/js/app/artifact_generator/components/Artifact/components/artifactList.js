@@ -57,7 +57,6 @@ export default function ArtifactList() {
       search_term: formik.values.search_term,
       lang: i18n.language
     })}`, {headers: headers}).then(res => {
-      console.log(res.data);
       formik.setFieldValue("artifacts", res.data)
     })
   }
@@ -68,8 +67,6 @@ export default function ArtifactList() {
     }
     handleSearch(formik.values.search_term)
   }, 500, [formik.values.search_term]);
-
-  console.log(formik.values)
 
   return (
     <Box sx={{m: "1em"}}>

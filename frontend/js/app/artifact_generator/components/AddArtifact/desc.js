@@ -28,8 +28,20 @@ export default function Desc() {
       </Typography>
 
       <Typography paragraph>
-        Image Path 为对应图片的后端路径，可以在Github Repo的 /backend/artifact_generator/assets/images/artifacts/data
-        中找到，若没有对应的圣遗物图片，则为未更新，将此处留空。
+        Image Path 为对应图片的后端路径，若没有对应的圣遗物图片，则为未更新，将此处留空。
+        通常为圣遗物的英文名称，可以查看
+        <a
+          href="https://github.com/qiushanbeikun/genshin_tools_rework/tree/master/backend/artifact_generator/assets/artifacts"
+          target="_blank">
+          {` Github Repo `}
+        </a>
+        的backend/artifact_generator/assets/artifact 路径下的文件。
+      </Typography>
+      <Typography paragraph>
+        当前本站的圣遗物图片来自于
+        <a href="https://github.com/wormtql/genshin_artifact" target="_blank">
+          莫娜占卜铺
+        </a>
       </Typography>
     </Grid>
   )

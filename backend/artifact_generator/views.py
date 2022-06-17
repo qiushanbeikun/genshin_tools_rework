@@ -68,7 +68,7 @@ def add_artifact(request):
     data = request.data
     contributor = User.objects.get(id=request.user.id)
     exist = ArtifactDesc.objects.filter(title=data["title"])
-    if exist.exists():
+    if exist.exists() and exist[0].production is False:
         exist.update(title=data["title"], flower=data["names"][0], feather=data["names"][1],
                      glass=data["names"][2], cup=data["names"][3], head=data["names"][4], img_path=data["img_path"],
                      flower_desc=data["descs"][0], feather_desc=data["descs"][1], glass_desc=data["descs"][2],
@@ -89,12 +89,20 @@ def add_artifact(request):
     return Response("update success", HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes((IsAdminUser,))
 def publish(request):
     # todo
-    uid = request.data.id
-    template = ArtifactDesc.objects.get(id=uid)
-    template.production = True
+    aid, production = request.data["id"], request.data["production"],
+    template = ArtifactDesc.objects.get(id=aid)
+    template.production = production
     template.save()
-    return Response("publish success", HTTP_200_OK)
+    return Response(ArtifactDescSerializer(template).data, HTTP_200_OK)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAdminUser,))
+def delete(request, aid):
+    template = ArtifactDesc.objects.get(id=aid)
+    print(template.title)
+    return Response("delete success", HTTP_200_OK)

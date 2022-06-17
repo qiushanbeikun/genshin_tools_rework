@@ -16,5 +16,7 @@ urlpatterns = [
     path('get_artifact_summary/', views.get_artifact_summary, name='artifact_summary'),
     path('artifact/', views.get_artifacts, name='get_artifacts'),
     path('get_set_names/', views.get_set_names, name='get_set_names'),
-    path('publish/', views.publish, name='publish')
+    path('publish/', views.publish, name='publish'),
+    path('delete/<int:aid>', views.publish, name='publish')
+
 ]

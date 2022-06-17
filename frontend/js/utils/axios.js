@@ -37,7 +37,7 @@ axiosService.interceptors.response.use(
 const refreshAuth = async (failedRequest) => {
   const {refreshToken} = store.getState().auth;
   if (refreshToken !== null) {
-    return axios.post("/api/auth/refresh", {refresh: refreshToken})
+    return axios.post("/api/auth/refresh/", {refresh: refreshToken})
       .then((res) => {
         const {access, refresh} = res.data;
         failedRequest.response.config.headers.Authentication = 'Bearer' + access;
@@ -56,6 +56,5 @@ const refreshAuth = async (failedRequest) => {
 createAuthRefreshInterceptor(axiosService, refreshAuth);
 
 export function fetcher(url) {
-  console.log(store.getState().auth.token)
   return axiosService.post(url, {token: store.getState().auth.token}).then((res) => res.data);
 }

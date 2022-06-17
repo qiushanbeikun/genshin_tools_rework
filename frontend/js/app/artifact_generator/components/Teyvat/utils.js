@@ -118,7 +118,7 @@ export function getMainPropRate(mainPropName) {
     case i18n.t("artifact_props:phy_buff"):
       return "58.3%"
     case i18n.t("artifact_props:hp"):
-      return "4780"
+      return "4,780"
     case i18n.t("artifact_props:ctk_rate"):
       return "31.1%"
     case i18n.t("artifact_props:ctk_dmg"):

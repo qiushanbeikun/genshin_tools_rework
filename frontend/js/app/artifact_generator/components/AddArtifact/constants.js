@@ -5,7 +5,7 @@ export const INITIAL_FORM_VALUE = {
   img_path: "",
   two_set_buff: "",
   four_set_buff: "",
-
+  production: "False"
 }
 
 export const NAME_TO_DISPLAY_TEXT = {}

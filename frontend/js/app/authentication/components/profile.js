@@ -8,7 +8,6 @@ import {Box, Button, Grid, TextField} from "@mui/material";
 import Copyright from "./copyright";
 import {fetcher} from "../../../utils/axios";
 import useSWR from 'swr';
-import {useEffect} from "react";
 import store from "../../../store";
 import authSlice from "../../../store/slices/auth";
 
@@ -35,9 +34,6 @@ export default function Profile() {
   const headers = {
     Authorization: auth.token ? `Bearer ${auth.token}` : null,
   }
-  const userId = auth.account?.id;
-
-  useSWR(`/api/auth/verify/`, fetcher);
 
   const formik = useFormik({
     initialValues: {

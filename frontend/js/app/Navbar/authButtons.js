@@ -8,6 +8,8 @@ import {useTranslation} from "react-i18next";
 import {Box, Button, Typography} from "@mui/material";
 import authSlice from "../../store/slices/auth";
 import {useNavigate} from "react-router-dom";
+import useSWR from "swr";
+import {fetcher} from "../../utils/axios";
 
 export default function AuthButtons() {
 
@@ -16,6 +18,8 @@ export default function AuthButtons() {
   const auth = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useSWR(`/api/auth/verify/`, fetcher);
 
   const handleLogOut = () => {
     dispatch(authSlice.actions.logout());
