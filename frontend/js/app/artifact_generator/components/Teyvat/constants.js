@@ -11,7 +11,7 @@ export const SAND_CONSTRAINT = [
   i18n.t("artifact_props:recharge_rate"),
   i18n.t("artifact_props:def_percent")];
 
-export const CUP_CONSTRAINT = [
+export const GOBLET_CONSTRAINT = [
   i18n.t("artifact_props:atk_percent"),
   i18n.t("artifact_props:hp_percent"),
   i18n.t("artifact_props:def_percent"),
@@ -52,19 +52,9 @@ export const POSITION = {
   'flower': i18n.t("artifact_positions:flower"),
   'feather': i18n.t("artifact_positions:feather"),
   'sand': i18n.t("artifact_positions:sand"),
-  'cup': i18n.t("artifact_positions:cup"),
+  'goblet': i18n.t("artifact_positions:goblet"),
   'head': i18n.t("artifact_positions:head"),
 }
-
-// export const ARTIFACT_NAMES = {
-//   'flower': '明威之镡',
-//   'feather': '切落之羽',
-//   'sand': '雷云之笼',
-//   'cup': '绯花之壶',
-//   'head': '华饰之兜',
-// }
-
-
 
 export const ENHANCE_RATES = {
   'atk_num': [14, 16, 18, 19],
@@ -83,11 +73,11 @@ export const POSITION_CONSTRAINTS = {
   "flower": FLOWER_CONSTRAINT,
   "feather": FEATHER_CONSTRAINT,
   "sand": SAND_CONSTRAINT,
-  "cup": CUP_CONSTRAINT,
+  "goblet": GOBLET_CONSTRAINT,
   "head": HEAD_CONSTRAINT,
 }
 
-export const ARTIFACT_POSITIONS = ["flower", "feather", "sand", "cup", "head"];
+export const ARTIFACT_POSITIONS = ["flower", "feather", "sand", "goblet", "head"];
 export const DEFAULT_MAIN_PROP = 0;
 export const INITIAL_VICE_PROPS = [
   {

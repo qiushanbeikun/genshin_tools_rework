@@ -23,6 +23,8 @@ def generate_teyvat(config):
     background.paste(artifact_img, (341, 73), artifact_img)
     image = ImageDraw.Draw(background)
 
+    print("23232323322322", artifact_name, template.sand)
+
     image.text((39, 12), artifact_name, (255, 255, 255), font=header_font)
     image.text((37, 90), config['position_name'], (255, 255, 255), font=main_prop_font)
     image.text((37, 195), config['mainProp'], (194, 175, 168), font=main_prop_font)

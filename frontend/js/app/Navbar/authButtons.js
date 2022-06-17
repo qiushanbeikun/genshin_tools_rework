@@ -19,7 +19,9 @@ export default function AuthButtons() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useSWR(`/api/auth/verify/`, fetcher);
+  if (auth.token) {
+    useSWR(`/api/auth/verify/`, fetcher);
+  }
 
   const handleLogOut = () => {
     dispatch(authSlice.actions.logout());

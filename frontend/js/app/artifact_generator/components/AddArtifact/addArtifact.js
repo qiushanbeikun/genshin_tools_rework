@@ -61,12 +61,12 @@ export default function AddArtifact() {
   const refreshArti = (data) => {
     formik.setFieldValue("id", data.id)
     formik.setFieldValue("title", data.title)
-    formik.setFieldValue("names", [data.flower, data.feather, data.glass, data.cup, data.head]);
+    formik.setFieldValue("names", [data.flower, data.feather, data.sand, data.goblet, data.head]);
     formik.setFieldValue("img_path", data.img_path);
     formik.setFieldValue("two_set_buff", data.two_set_buff);
     formik.setFieldValue("four_set_buff", data.four_set_buff);
     formik.setFieldValue("descs",
-      [data.flower_desc, data.feather_desc, data.glass_desc, data.cup_desc, data.head_desc]);
+      [data.flower_desc, data.feather_desc, data.sand_desc, data.goblet_desc, data.head_desc]);
     formik.setFieldValue("production", data.production)
   }
 
@@ -141,7 +141,6 @@ export default function AddArtifact() {
                 </>
                 }
               </Box>
-
             </form>
           </FormikProvider>
         </Grid>

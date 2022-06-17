@@ -23,9 +23,6 @@ export default function Desc() {
       <Typography paragraph>
         对于多行的文本，系统会自动记录换行和缩进。或在输入时加入“\n”分隔符以及对应的空格。
       </Typography>
-      <Typography paragraph>
-        Flower - Cup 为对应圣遗物位的名称，如：“雷云之笼”。
-      </Typography>
 
       <Typography paragraph>
         Image Path 为对应图片的后端路径，若没有对应的圣遗物图片，则为未更新，将此处留空。

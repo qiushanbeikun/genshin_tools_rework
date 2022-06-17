@@ -55,8 +55,8 @@ const en = {
     flower: "Flower of Life",
     feather: "Plume of Death",
     sand: "Sand of Eon",
-    cup: "Goblet of Eonothem",
-    head: "circlet of Logos",
+    goblet: "Goblet of Eonothem",
+    head: "Circlet of Logos",
   }
 }
 

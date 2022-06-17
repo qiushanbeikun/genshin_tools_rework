@@ -10,7 +10,6 @@ export default function PositionInput({index, target}) {
 
   const targetField = (target === "name") ? names : descs;
 
-
   return (
     <Fragment key={index}>
       <Grid item xs={3}>{INDEX_TO_NAME_POSITION[index]} {target}</Grid>
@@ -23,9 +22,6 @@ export default function PositionInput({index, target}) {
                      fullWidth multiline rows={2}/>
         }
       </Grid>
-      {/*<Grid item xs={4}>*/}
-      {/*  <input type="file" accept="image/*" id="select_artifact_img" onChange={handleImgUpload} disabled/>*/}
-      {/*</Grid>*/}
     </Fragment>
   )
 }

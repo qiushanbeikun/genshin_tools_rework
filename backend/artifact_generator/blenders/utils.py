@@ -9,26 +9,19 @@ BACKGROUND_DIR = "./artifact_generator/assets/images/"
 
 
 def get_arti_image(pos, dirname):
-    return Image.open(ARTIFACT_PHOTO_DIR + "/" + dirname + "_" + pos_parser(pos) + '.png').convert('RGBA')
+    return Image.open(ARTIFACT_PHOTO_DIR + "/" + dirname + "_" + pos + '.png').convert('RGBA')
 
 
 # god damn heroku doesnt support python switch???
-def pos_parser(pos):
-    if pos == "cup":
-        return "goblet"
-    else:
-        return pos
-
-
 def get_arti_position_name(template, position):
     if position == "flower":
         return template.flower
     if position == "feather":
         return template.feather
-    if position == "glass":
-        return template.glass
-    if position == "cup":
-        return template.cup
+    if position == "sand":
+        return template.sand
+    if position == "goblet":
+        return template.goblet
     if position == "head":
         return template.head
 
@@ -38,10 +31,10 @@ def get_arti_position_desc(template, position):
         return template.flower_desc
     if position == "feather":
         return template.feather_desc
-    if position == "glass":
-        return template.glass_desc
-    if position == "cup":
-        return template.cup_desc
+    if position == "sand":
+        return template.sand_desc
+    if position == "goblet":
+        return template.goblet_desc
     if position == "head":
         return template.head_desc
 

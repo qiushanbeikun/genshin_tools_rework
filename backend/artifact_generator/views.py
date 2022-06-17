@@ -84,18 +84,18 @@ def add_artifact(request):
     exist = ArtifactDesc.objects.filter(title=data["title"])
     if exist.exists() and exist[0].production is False:
         exist.update(title=data["title"], flower=data["names"][0], feather=data["names"][1],
-                     glass=data["names"][2], cup=data["names"][3], head=data["names"][4], img_path=data["img_path"],
-                     flower_desc=data["descs"][0], feather_desc=data["descs"][1], glass_desc=data["descs"][2],
-                     cup_desc=data["descs"][3], head_desc=data["descs"][4], language=data["language"],
+                     sand=data["names"][2], goblet=data["names"][3], head=data["names"][4], img_path=data["img_path"],
+                     flower_desc=data["descs"][0], feather_desc=data["descs"][1], sand_desc=data["descs"][2],
+                     goblet_desc=data["descs"][3], head_desc=data["descs"][4], language=data["language"],
                      two_set_buff=data["two_set_buff"], four_set_buff=data["four_set_buff"])
         exist[0].contribution.add(contributor)
         exist = exist[0]
     else:
         exist = ArtifactDesc(title=data["title"], flower=data["names"][0], feather=data["names"][1],
-                             glass=data["names"][2], cup=data["names"][3], head=data["names"][4],
+                             sand=data["names"][2], goblet=data["names"][3], head=data["names"][4],
                              img_path=data["img_path"], flower_desc=data["descs"][0],
-                             feather_desc=data["descs"][1], glass_desc=data["descs"][2],
-                             cup_desc=data["descs"][3], head_desc=data["descs"][4], language=data["language"],
+                             feather_desc=data["descs"][1], sand_desc=data["descs"][2],
+                             goblet_desc=data["descs"][3], head_desc=data["descs"][4], language=data["language"],
                              two_set_buff=data["two_set_buff"], four_set_buff=data["four_set_buff"])
         exist.save()
         exist.contribution.add(contributor)
