@@ -32,9 +32,7 @@ export default function AddArtifact() {
     payload.contributor = auth.account.email;
     payload.language = language;
     axios.post("/artifact_generator/add_artifact/", payload, {headers: headers}).then(res => {
-      console.log(res);
       refreshArti(res.data);
-      // alert(id ? 'Upload succeed.' : 'Update succeed')
     })
   }
 
@@ -52,8 +50,7 @@ export default function AddArtifact() {
 
   const handleDelete = (id) => {
     alert("double check to delete")
-    axios.delete(`/artifact_generator/delete/${id}`, {headers: headers})
-      .then(res => console.log("not implemented"))
+    axios.delete(`/artifact_generator/delete/${id}`, {headers: headers}).then(r => navigate("/artifact_generator"))
   }
 
   const formik = useFormik({
@@ -74,9 +71,9 @@ export default function AddArtifact() {
   }
 
   useEffect(() => {
-    id && axios.get(`/artifact_generator/artifact/?${qs.stringify({id: id, lang: language})}`,
+    id && axios.get(`/artifact_generator/artifact/?${qs.stringify({id: id})}`,
       {headers: headers}).then(res => {
-      refreshArti(res.data[0])
+      refreshArti(res.data)
     })
   }, [])
 
@@ -125,7 +122,6 @@ export default function AddArtifact() {
               </Grid>
 
               <Box sx={{m: "1em", textAlign: "center"}}>
-
                 <Button variant="contained" type="submit" disabled={formik.values.production}>
                   {!!id ? "Update Template" : "Upload Template"}
                 </Button>
@@ -145,6 +141,7 @@ export default function AddArtifact() {
                 </>
                 }
               </Box>
+
             </form>
           </FormikProvider>
         </Grid>

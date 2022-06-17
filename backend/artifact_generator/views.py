@@ -68,6 +68,13 @@ def get_active_artifacts(request):
     return Response(ArtifactDescSerializer(artifact_list, many=True).data, status=HTTP_200_OK)
 
 
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_artifact(request):
+    arti_id = request.GET.get('id')
+    template = ArtifactDesc.objects.get(id=arti_id)
+    return Response(ArtifactDescSerializer(template).data, status=HTTP_200_OK)
+
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
