@@ -9,18 +9,12 @@ const PageHeightContainer = styled.div`
   height: calc(100vh - 64px);
   display: flex;
   align-items: center;
-  scroll-snap-type: y mandatory;
-`;
-
-const HomeWrapper = styled(Box)`
-  display: block;
-  margin: 2em auto;
 `;
 
 export default function Homepage() {
   const classes = GenshinStyles()
   return (
-    <HomeWrapper maxWidth="md">
+    <Box maxWidth="md" sx={{m: "0 auto"}}>
       <PageHeightContainer>
         <div>
           <Typography variant="h3" className={classes.root}>Genshin Impact Tools</Typography>
@@ -38,19 +32,25 @@ export default function Homepage() {
               .
             </Typography>
           </div>
+          <br/>
+          <Typography>
+            For any fair please contact {" "}
+            <a href="mailto:beikuncanada@gmail.com">author</a>
+            {" "} or join the QQ group (TBA).
+          </Typography>
         </div>
 
       </PageHeightContainer>
 
-      <PageHeightContainer>
-        <Grid container spacing={1}>
-          {HOME_PAGE_DOC.map((props) => {
-            return (
-              <Content {...props} />
-            )
-          })}
-        </Grid>
-      </PageHeightContainer>
-    </HomeWrapper>
+      {/*<PageHeightContainer>*/}
+      {/*  <Grid container spacing={1}>*/}
+      {/*    {HOME_PAGE_DOC.map((props) => {*/}
+      {/*      return (*/}
+      {/*        <Content {...props} />*/}
+      {/*      )*/}
+      {/*    })}*/}
+      {/*  </Grid>*/}
+      {/*</PageHeightContainer>*/}
+    </Box>
   )
 }

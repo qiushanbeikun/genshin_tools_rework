@@ -33,7 +33,6 @@ export default function Teyvat() {
   const language = i18n.language
 
   const handleSubmit = (values) => {
-    console.log(values);
     const selectedSetName = setNames[values.artiSet];
     const artiConfig = getParsedArtiConfig(values, selectedSetName);
     axios.post("/artifact_generator/teyvat/", artiConfig).then((res) => {
@@ -48,7 +47,6 @@ export default function Teyvat() {
 
   useEffect(() => {
     axios.get(`/artifact_generator/get_set_names/?${qs.stringify({lang:language})}`).then(res => {
-      console.log(res.data)
       setSetNames(res.data);
     })
   }, [])

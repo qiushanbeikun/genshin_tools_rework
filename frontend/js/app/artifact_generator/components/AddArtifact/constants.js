@@ -1,11 +1,12 @@
 export const INITIAL_FORM_VALUE = {
+  id: "",
   title: "",
   names: ['', '', '', '', ''],
   descs: ['', '', '', '', ''],
   img_path: "",
   two_set_buff: "",
   four_set_buff: "",
-  production: "False"
+  production: false,
 }
 
 export const NAME_TO_DISPLAY_TEXT = {}

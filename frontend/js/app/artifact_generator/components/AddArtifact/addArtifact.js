@@ -33,6 +33,7 @@ export default function AddArtifact() {
     payload.language = language;
     axios.post("/artifact_generator/add_artifact/", payload, {headers: headers}).then(res => {
       console.log(res);
+      refreshArti(res.data);
       // alert(id ? 'Upload succeed.' : 'Update succeed')
     })
   }
@@ -61,6 +62,7 @@ export default function AddArtifact() {
   });
 
   const refreshArti = (data) => {
+    formik.setFieldValue("id", data.id)
     formik.setFieldValue("title", data.title)
     formik.setFieldValue("names", [data.flower, data.feather, data.glass, data.cup, data.head]);
     formik.setFieldValue("img_path", data.img_path);
@@ -123,7 +125,8 @@ export default function AddArtifact() {
               </Grid>
 
               <Box sx={{m: "1em", textAlign: "center"}}>
-                <Button variant="contained" type="submit">
+
+                <Button variant="contained" type="submit" disabled={formik.values.production}>
                   {!!id ? "Update Template" : "Upload Template"}
                 </Button>
 
@@ -133,7 +136,7 @@ export default function AddArtifact() {
                 {auth.account.is_superuser &&
                 <>
                   <Button variant="contained" color="error"
-                          onClick={() => handlePublish(id, !formik.values.production)}>
+                          onClick={() => handlePublish(formik.values.id, !formik.values.production)}>
                     {formik.values.production ? "Unpublished" : "Publish"}
                   </Button>
                   <Button variant="contained" color="error" onClick={() => handleDelete(id)}>

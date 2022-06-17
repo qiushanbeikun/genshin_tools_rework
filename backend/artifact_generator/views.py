@@ -29,9 +29,6 @@ def teyvat(request):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def get_artifact_summary(request):
-    total_active_artifacts = Artifact.objects.filter(production=True)
-    # total_contributors = Artifact.objects.all()
-
     result = {"total_active_artifacts": ArtifactDesc.objects.filter(production=True).count(),
               "total_uploads": ArtifactDesc.objects.all().count(),
               "total_contributors": ArtifactDesc.objects.values_list('contribution').distinct().count()}
@@ -48,18 +45,28 @@ def get_set_names(request):
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def get_artifacts(request):
+def get_pending_artifacts(request):
     lang = request.GET.get('lang')
     search_term = request.GET.get('search_term')
     arti_id = request.GET.get('id')
+    artifact_list = ArtifactDesc.objects.filter(production=False)
     if search_term == "":
-        artifact_list = ArtifactDesc.objects.filter(language=lang)
+        artifact_list = artifact_list.filter(language=lang)
     elif search_term is not None:
-        artifact_list = ArtifactDesc.objects.filter(language=lang, title__icontains=search_term)
+        artifact_list = artifact_list.filter(language=lang, title__icontains=search_term)
     else:
-        artifact_list = ArtifactDesc.objects.filter(language=lang, id=arti_id)
+        artifact_list = artifact_list.filter(language=lang, id=arti_id)
     serializer = ArtifactDescSerializer(artifact_list, many=True)
     return Response(serializer.data, status=HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_active_artifacts(request):
+    lang = request.GET.get('lang')
+    artifact_list = ArtifactDesc.objects.filter(production=True, language=lang)
+    return Response(ArtifactDescSerializer(artifact_list, many=True).data, status=HTTP_200_OK)
+
 
 
 @api_view(['POST'])
@@ -86,7 +93,9 @@ def add_artifact(request):
         exist.save()
         exist.contribution.add(contributor)
 
-    return Response("update success", HTTP_200_OK)
+    serializer = ArtifactDescSerializer(exist)
+
+    return Response(serializer.data, HTTP_200_OK)
 
 
 @api_view(['POST'])
