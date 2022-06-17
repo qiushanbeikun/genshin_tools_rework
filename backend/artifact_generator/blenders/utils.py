@@ -14,9 +14,10 @@ def get_arti_image(pos, dirname):
 
 # god damn heroku doesnt support python switch???
 def pos_parser(pos):
-    if pos == "head":
+    if pos == "cup":
         return "goblet"
-    else : return pos
+    else:
+        return pos
 
 
 def get_arti_position_name(template, position):
@@ -42,7 +43,7 @@ def get_arti_position_desc(template, position):
     if position == "cup":
         return template.cup_desc
     if position == "head":
-        return template.head_Desc
+        return template.head_desc
 
 
 def get_bases(background_file_name):
