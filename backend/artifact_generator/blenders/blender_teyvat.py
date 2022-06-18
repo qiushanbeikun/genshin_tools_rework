@@ -38,7 +38,7 @@ def generate_teyvat(config):
     buff_lines = len(template.four_set_buff.split("\n"))
     desc_height = 893 if buff_lines == 3 else 926
 
-    image.text((38, 664), title, (92, 178, 86), font=title_font)
+    image.text((38, 664), title+":", (92, 178, 86), font=title_font)
     image.text((74, 713), template.two_set_buff, (114, 118, 131), font=title_font)
     image.text((74, 763), template.four_set_buff, (114, 118, 131), font=title_font)
     image.text((36, desc_height), artifact_desc, (114, 118, 131), font=title_font)

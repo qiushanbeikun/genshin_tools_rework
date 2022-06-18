@@ -94,7 +94,7 @@ export function getParsedArtiConfig(artiConfig, selectedSetName) {
     const ctx = artiConfig.vice_props[index];
     const prop = ctx.prop;
     const count = ctx.count;
-    res = Object.assign(res, {[name]: `${propNameParser(VICE_PROP_TYPE[prop - 1])} +${calcEnhance(prop, count)}`})
+    res = Object.assign(res, {[name]: `${propNameParser(VICE_PROP_TYPE[prop - 1])}+${calcEnhance(prop, count)}`})
   })
   console.log(res);
   return res;

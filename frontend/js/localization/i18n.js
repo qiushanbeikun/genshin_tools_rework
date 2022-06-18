@@ -22,10 +22,6 @@ i18n
 
     keySeparator: false, // we use content as keys
 
-    // interpolation: {
-    //   formatSeparator: ","
-    // },
-
     react: {
       wait: true
     }
