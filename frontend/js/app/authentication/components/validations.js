@@ -22,10 +22,8 @@ export const signUpValidation = () => yup.object({
 })
 
 const emailValidationApi = async (email) => {
-  axios.get(`/api/auth/check_email/?${qs.stringify({email})}`).then((response) => {
-    console.log(response.data.data === "true")
-    return response.data.data === "true";
-  })
+  const {data} = await axios.get(`/api/auth/check_email/?${qs.stringify({email})}`);
+  return data.data === "true";
 }
 
 

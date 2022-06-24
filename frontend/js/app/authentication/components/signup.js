@@ -30,16 +30,12 @@ export default function Signup() {
   const isMounted = useIsMounted();
   const navigate = useNavigate();
 
-  const handleSignUp = (values) => {
-    console.log(values);
-    axios.post("/api/auth/register/", values).then((res) => {
-      console.log(res)
-      alert("Sign Up succeed, will");
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000)
-
-    })
+  const handleSignUp = async (values) => {
+    await axios.post("/api/auth/register/", values)
+    alert("Sign Up succeed, will redirect to login page.");
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000)
   }
 
   const formik = useFormik({

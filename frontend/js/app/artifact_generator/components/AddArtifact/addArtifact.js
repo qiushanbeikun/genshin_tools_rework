@@ -23,15 +23,12 @@ export default function AddArtifact() {
     Authorization: auth.token ? `Bearer ${auth.token}` : null,
   };
 
-  const handleSubmit = (values, language) => {
+  const handleSubmit = async (values, language) => {
     const payload = { ...values };
     payload.contributor = auth.account.email;
     payload.language = language;
-    axiosService
-      .post('/artifact_generator/add_artifact/', payload, { headers: headers })
-      .then((res) => {
-        refreshArti(res.data);
-      });
+    const { data } = await axiosService.post('/artifact_generator/add_artifact/', payload);
+    refreshArti(data);
   };
 
   /**
@@ -39,20 +36,18 @@ export default function AddArtifact() {
    * @param id
    * @param publish Note this publish here is the target state, if want to make release arti, it should be true
    */
-  const handlePublish = (id, publish) => {
-    axiosService
-      .post(`/artifact_generator/publish/`, {
-        id: id,
-        production: publish,
-      })
-      .then((res) => formik.setFieldValue('production', res.data.production));
+  const handlePublish = async (id, publish) => {
+    const { data } = await axiosService.post(`/artifact_generator/publish/`, {
+      id: id,
+      production: publish,
+    });
+    formik.setFieldValue('production', data.production);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     alert('double check to delete');
-    axiosService
-      .delete(`/artifact_generator/delete/${id}`, { headers: headers })
-      .then((r) => navigate('/artifact_generator'));
+    await axiosService.delete(`/artifact_generator/delete/${id}`, { headers: headers });
+    navigate('/artifact_generator');
   };
 
   const formik = useFormik({
@@ -77,11 +72,13 @@ export default function AddArtifact() {
     formik.setFieldValue('production', data.production);
   };
 
-  useAsyncEffect(() => {
-    id &&
-      axiosService.get(`/artifact_generator/artifact/?${qs.stringify({ id: id })}`).then((res) => {
-        refreshArti(res.data);
-      });
+  useAsyncEffect(async () => {
+    if (!!id) {
+      const { data } = await axiosService.get(
+        `/artifact_generator/artifact/?${qs.stringify({ id: id })}`
+      );
+      refreshArti(data);
+    }
   }, []);
 
   return (

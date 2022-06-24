@@ -55,19 +55,15 @@ export default function Celestia() {
     setIsModalOpen(false);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const haveEmpty = Object.keys(inputFields).reduce((acc, cur) => acc && cur !== '', true);
     if (!inputFields.allowBlank && haveEmpty) {
       alert('at least one input is empty');
       // todo highlight the empty inputs
     } else {
-      axios.post('/artifact_generator/celestia/', inputFields).then((res) => {
-        // todo: add spinner loading indicate for production
-        // intentionally 2 second delay to test loading spin works
-        // setTimeout(() => setArtifactProfile(res.data.data), 1000)
-        setArtifactProfile(res.data.data);
-      });
+      const { data } = await axios.post('/artifact_generator/celestia/', inputFields);
+      setArtifactProfile(data.data);
     }
   };
 

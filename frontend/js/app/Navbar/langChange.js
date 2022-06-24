@@ -2,16 +2,16 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {Box} from "@mui/material";
-import i18n from "i18next";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
-import {useState} from "react";
+import { Box } from '@mui/material';
+import i18n from 'i18next';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useState } from 'react';
 
 const LANGUAGES = [
-  {name: "en", text: "English"},
-  {name: "zh", text: "简体中文"},
-]
+  { name: 'en', text: 'English' },
+  { name: 'zh', text: '简体中文' },
+];
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -23,14 +23,15 @@ export default function BasicMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLangChange = (e, lang) => {
+  const handleLangChange = async (e, lang) => {
     // need to refresh the page ow some const are caches and will update.
     setSpin(true);
-    i18n.changeLanguage(lang).then(() => window.location.reload(false))
-  }
+    await i18n.changeLanguage(lang);
+    window.location.reload(false);
+  };
 
   return (
-    <Box sx={{display: 'inline-flex'}}>
+    <Box sx={{ display: 'inline-flex' }}>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -51,12 +52,14 @@ export default function BasicMenu() {
         }}
       >
         {LANGUAGES.map((language) => (
-          <MenuItem onClick={(e) => handleLangChange(e, language.name)}>{language.text}</MenuItem>
+          <MenuItem onClick={(e) => handleLangChange(e, language.name)} key={language}>
+            {language.text}
+          </MenuItem>
         ))}
       </Menu>
 
-      <Backdrop sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}} open={spin}>
-        <CircularProgress color="inherit"/>
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={spin}>
+        <CircularProgress color="inherit" />
       </Backdrop>
     </Box>
   );

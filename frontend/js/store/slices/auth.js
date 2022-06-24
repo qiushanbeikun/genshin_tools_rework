@@ -1,23 +1,20 @@
 // @flow
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {AccountResponse} from "../types/types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AccountResponse } from '../types/types';
 
 type State = {
-  token: string | null;
-  refreshToken: string | null;
-  account: AccountResponse | null;
+  token: string | null,
+  refreshToken: string | null,
+  account: AccountResponse | null,
 };
 
 const initialState = { token: null, refreshToken: null, account: null };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
-    setAuthTokens(
-      state: State,
-      action: PayloadAction<{ token: string; refreshToken: string }>
-    ) {
+    setAuthTokens(state: State, action: PayloadAction<{ token: string, refreshToken: string }>) {
       // console.log('setting TOKEN', action.payload, typeof action.payload.refreshToken)
       state.refreshToken = action.payload.refreshToken;
       state.token = action.payload.token;
@@ -26,10 +23,12 @@ const authSlice = createSlice({
       state.account = action.payload;
     },
     logout(state: State) {
+      console.log('perform logout started');
       state.account = null;
       state.refreshToken = null;
       state.token = null;
-    }
+      console.log('perform logout finished');
+    },
   },
 });
 

@@ -28,8 +28,8 @@ export function ArtiList({ target }) {
       </StyledArtiRow>
 
       {artifacts.length !== 0 &&
-        artifacts.map((artifact) => (
-          <StyledArtiRow container spacing={1} justify="center">
+        artifacts.map((artifact, index) => (
+          <StyledArtiRow container spacing={1} justify="center" key={`artiRow_${index}`}>
             <Grid item xs={2}>
               Portrait
             </Grid>

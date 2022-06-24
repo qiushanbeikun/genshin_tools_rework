@@ -19,15 +19,17 @@ export default function AuthButtons() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogOut = () => {
-    axiosService
-      .post(`/api/auth/blacklist/`, {
-        refresh: auth.refreshToken,
-      })
-      .then((res) => {
-        dispatch(authSlice.actions.logout());
-        navigate('/login');
-      });
+  const handleLogOut = async () => {
+    try {
+      await axiosService.post(`/api/auth/blacklist/`, { refresh: auth.refreshToken });
+      localStorage.clear();
+      dispatch(authSlice.actions.logout());
+      console.log('clear local storage');
+      navigate('/login');
+    } catch (e) {
+      console.log('entered catch');
+      navigate('/login');
+    }
   };
 
   return (

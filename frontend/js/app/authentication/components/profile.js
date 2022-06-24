@@ -11,7 +11,7 @@ import useSWR from 'swr';
 import store from '../../../store';
 import authSlice from '../../../store/slices/auth';
 
-const handleUpdate = (values) => {
+const handleUpdate = async (values) => {
   const payload = {
     id: values.id,
     username: values.username,
@@ -22,10 +22,8 @@ const handleUpdate = (values) => {
   if (!!values.genshin_uid) {
     payload['genshin_uid'] = values.genshin_uid;
   }
-
-  axiosService.post(`/api/auth/update/`, values).then((res) => {
-    store.dispatch(authSlice.actions.setAccount(res.data));
-  });
+  const {data} = axiosService.post(`/api/auth/update/`, values);
+  store.dispatch(authSlice.actions.setAccount(data));
 };
 
 export default function Profile() {

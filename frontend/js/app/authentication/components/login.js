@@ -35,6 +35,7 @@ export default function Login() {
         })
       );
       dispatch(authSlice.actions.setAccount(res.data.user));
+      navigate('/');
     });
   };
 
