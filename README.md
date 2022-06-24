@@ -1,5 +1,6 @@
 # Genshin Tool Box Remake of Django + React
 
+Open this app on [herokuApp](https://genshin-tools-qsbk.herokuapp.com/)
 
 ## About
 Based on the [boiler plate](https://github.com/vintasoftware/django-react-boilerplate/tree/master/backend/common)   
