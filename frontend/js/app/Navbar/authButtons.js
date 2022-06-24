@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import store, { RootState } from '../../store';
+import { RootState } from '../../store';
 import * as React from 'react';
 import LangChange from './langChange';
 import { BtnWrapper, StyledAppBarLink } from './styles';
@@ -8,9 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
 import authSlice from '../../store/slices/auth';
 import { useNavigate } from 'react-router-dom';
-import useSWR from 'swr';
-import { axiosService, fetcher } from '../../utils/axios';
-import axios from 'axios';
+import { axiosService } from '../../utils/axios';
 
 export default function AuthButtons() {
   const classes = GenshinStyles();
@@ -22,13 +20,13 @@ export default function AuthButtons() {
   const handleLogOut = async () => {
     try {
       await axiosService.post(`/api/auth/blacklist/`, { refresh: auth.refreshToken });
-      localStorage.clear();
       dispatch(authSlice.actions.logout());
+      localStorage.clear();
       console.log('clear local storage');
       navigate('/login');
     } catch (e) {
       console.log('entered catch');
-      navigate('/login');
+      window.location.replace('/login');
     }
   };
 

@@ -32,7 +32,6 @@ const refreshAuth = async (failedRequest) => {
       store.dispatch(authSlice.actions.logout());
       console.log('error caught2');
       localStorage.clear();
-
       window.location.refresh();
       // if (err.response && err.response.status === 401) {
       //   console.log('Refresh token expired, force logout.');

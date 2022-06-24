@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { generateLabels, generatePanelList, panelsToDmgList, perNumChartData } from './utils';
 import { ErrorMessage, FormikProvider, useFormik, useFormikContext } from 'formik';
-import { Box, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import ChartSettings from './chartSettings';
-import { useEffect } from 'react';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,7 +14,9 @@ import {
 } from 'chart.js';
 import * as Yup from 'yup';
 import { Line } from 'react-chartjs-2';
-import { GRAPH_COLORS_PRESETS } from './constants';
+import useAsyncEffect from 'use-async-effect';
+import { generateChartContext } from './chart_utils/generateChartContext';
+import { chartEntryValidation } from './chart_utils/utils';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -41,56 +40,60 @@ export default function ChartPerNum() {
         { name: 'ele_mastery', step: 16, value: 'Ele Mastery' },
       ],
       boundary: 3,
+      baseChart: null,
+      prevChart: null,
     },
     validationSchema: validation,
   });
 
-  const labels = generateLabels(formik.values.boundary);
+  useAsyncEffect(async () => {
+    if (!chartEntryValidation(values, formik.values)) {
+      return;
+    }
+    const baseChart = await generateChartContext(
+      values,
+      formik.values.fields,
+      formik.values.boundary,
+      'base'
+    );
 
-  const dataValues = formik.values.fields.map((field) =>
-    perNumChartData(formik.values.boundary, field, values)
-  );
+    const prevChart = await generateChartContext(
+      values,
+      formik.values.fields,
+      formik.values.boundary,
+      'prev'
+    );
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'button',
-      },
-      title: {
-        display: true,
-        text: 'Damage Delta Expectation',
-      },
-    },
-  };
-
-  const data = {
-    labels: labels,
-    datasets: dataValues.map((value, index) => {
-      return {
-        id: index,
-        label: formik.values.fields[index].name,
-        fill: true,
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: value,
-        borderColor: GRAPH_COLORS_PRESETS[index],
-      };
-    }),
-  };
+    await formik.setFieldValue('baseChart', baseChart);
+    await formik.setFieldValue('prevChart', prevChart);
+  }, [formik.values.fields, formik.values.boundary, values]);
 
   return (
     <>
-      <Typography variant="h5">Marginal Utilization</Typography>
       <FormikProvider value={formik}>
         <Box sx={{ m: '1em 0' }}>
           <ErrorMessage name="boundary" />
-          {/*<Typography variant="h6">Settings</Typography>*/}
           {/* todo: in next sprint, make all fields of PanelInput are configurable. */}
           <ChartSettings fields={formik.values.fields} />
         </Box>
-        {data && <Line datasetIdKey="id" options={options} data={data} type="line" />}
+
+        {formik.values.baseChart && (
+          <Line
+            datasetIdKey="id"
+            options={formik.values.baseChart.options}
+            data={formik.values.baseChart.data}
+            type="line"
+          />
+        )}
+
+        {formik.values.prevChart && (
+          <Line
+            datasetIdKey="id"
+            options={formik.values.prevChart.options}
+            data={formik.values.prevChart.data}
+            type="line"
+          />
+        )}
       </FormikProvider>
     </>
   );

@@ -22,6 +22,7 @@ export default function DmgCalculator() {
           </Grid>
 
           <Grid item xs={7}>
+            <Typography variant="h5">Marginal Utilization</Typography>
             <ChartPerNum />
           </Grid>
         </Grid>

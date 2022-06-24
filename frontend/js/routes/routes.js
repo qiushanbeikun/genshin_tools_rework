@@ -42,8 +42,24 @@ export default function MyRoutes() {
           </LoginRequiredRoute>
         }
       />
-      <Route exact path="/upload_artifact/" element={<AddArtifact />} />
-      <Route exact path="/upload_artifact/:id" element={<AddArtifact />} />
+      <Route
+        exact
+        path="/upload_artifact/"
+        element={
+          <LoginRequiredRoute>
+            <AddArtifact />
+          </LoginRequiredRoute>
+        }
+      />
+      <Route
+        exact
+        path="/upload_artifact/:id"
+        element={
+          <LoginRequiredRoute>
+            <AddArtifact />
+          </LoginRequiredRoute>
+        }
+      />
 
       <Route exact path="/damage_calculator" element={<DmgCalculator />} />
     </Routes>
