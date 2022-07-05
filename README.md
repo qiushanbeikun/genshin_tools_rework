@@ -1,4 +1,4 @@
-# Genshin Tool Box Remake of Django + React
+# Genshin Tool Box Remake with Django + React
 
 Open this app on [herokuApp](https://genshin-tools-qsbk.herokuapp.com/)
 

@@ -6,7 +6,12 @@ import { Fragment } from 'react';
 export default function ChartSettings() {
   const { values, setFieldValue, handleChange } = useFormikContext();
 
-  const handleFieldChange = (value, field_name) => {
+  /**
+   * Note: e.target.value is a string instead of number, second line plus is to convert
+   * @param value
+   * @param field_name
+   */
+  const handleFieldChange = (value: string, field_name: string) => {
     console.log(value, field_name);
     const copy = [...values.fields];
     copy.find((f) => f.name === field_name).step = value;
@@ -30,7 +35,7 @@ export default function ChartSettings() {
         <ErrorMessage name="boundary" />
       </Grid>
 
-      {values.fields.map((field) => (
+      {values.fields.map((field: ChartSettingRow) => (
         <Fragment key={field.name}>
           <Grid item xs={2}>
             <Typography>{field.value}</Typography>
@@ -41,7 +46,7 @@ export default function ChartSettings() {
               value={field.step}
               variant="standard"
               required
-              onChange={(e) => handleFieldChange(e.target.value, field.name)}
+              onChange={(e) => handleFieldChange(+e.target.value, field.name)}
             />
           </Grid>
         </Fragment>

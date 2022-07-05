@@ -49,7 +49,7 @@ export const sanitizePanel = (panel: PanelInput): PanelInput => {
 
 export const calcDmg = (panel: PanelInput): DmgBundle => {
   const sanitized = sanitizePanel(panel);
-  const ele_bonus =
+  const eleBonus =
     sanitized.react_ratio === 1
       ? 1
       : 1 +
@@ -60,7 +60,7 @@ export const calcDmg = (panel: PanelInput): DmgBundle => {
     sanitized.total_atk *
     (1 + sanitized.ele_buff / 100) *
     (1 + sanitized.ele_buff / 100) *
-    ele_bonus;
+    eleBonus;
   const ctkEdDmg = unCtkEdDmg * (1 + sanitized.ctk_dmg / 100);
   const expectedDmg =
     (sanitized.ctk_rate / 100) * ctkEdDmg + (1 - sanitized.ctk_rate / 100) * unCtkEdDmg;
@@ -71,7 +71,7 @@ export const calcDmg = (panel: PanelInput): DmgBundle => {
   };
 };
 
-export const chartEntryValidation = (panel, chartSettings) => {
+export const chartEntryValidation = (panel: PanelInput, chartSettings): boolean => {
   for (const key in panel) {
     if (typeof panel[key] !== 'number' || panel[key] < 0) return false;
   }

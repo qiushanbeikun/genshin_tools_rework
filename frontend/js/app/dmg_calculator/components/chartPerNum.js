@@ -17,14 +17,15 @@ import { Line } from 'react-chartjs-2';
 import useAsyncEffect from 'use-async-effect';
 import { generateChartContext } from './chart_utils/generateChartContext';
 import { chartEntryValidation } from './chart_utils/utils';
+import { DEFAULT_BOUNDARY, DEFAULT_SETTINGS } from './constants';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 // todo validation is not working at this moment
 const validation = Yup.object().shape({
-  boundary: Yup.number('not a number')
-    .integer()
-    .positive()
+  boundary: Yup.number('Must be number')
+    .integer('Must be integer')
+    .positive('Must be positive')
     .required(),
 });
 
@@ -33,13 +34,8 @@ export default function ChartPerNum() {
 
   const formik = useFormik({
     initialValues: {
-      fields: [
-        { name: 'atk_percent', step: 6, value: 'ATK Percent' },
-        { name: 'ctk_rate', step: 3.5, value: 'CTK Rate' },
-        { name: 'ctk_dmg', step: 7, value: 'CTK DMG' },
-        { name: 'ele_mastery', step: 16, value: 'Ele Mastery' },
-      ],
-      boundary: 3,
+      fields: DEFAULT_SETTINGS,
+      boundary: DEFAULT_BOUNDARY,
       baseChart: null,
       prevChart: null,
     },
@@ -48,6 +44,7 @@ export default function ChartPerNum() {
 
   useAsyncEffect(async () => {
     if (!chartEntryValidation(values, formik.values)) {
+      alert('Please check inputs.');
       return;
     }
     const baseChart = await generateChartContext(

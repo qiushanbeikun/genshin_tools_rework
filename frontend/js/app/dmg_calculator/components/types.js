@@ -14,3 +14,9 @@ type DmgBundle = {
   ctkEdDmg: number,
   expectedDmg: number,
 };
+
+type ChartSettingRow = {
+  name: string,
+  step: number,
+  value: string,
+};
