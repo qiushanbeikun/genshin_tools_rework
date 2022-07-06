@@ -2,6 +2,7 @@ import { ErrorMessage, useFormikContext } from 'formik';
 import { Grid, TextField, Typography } from '@mui/material';
 import * as React from 'react';
 import { Fragment } from 'react';
+import type { ChartSettingRow } from '../types';
 
 export default function ChartSettings() {
   const { values, setFieldValue, handleChange } = useFormikContext();

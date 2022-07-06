@@ -1,4 +1,5 @@
-import { MASTERY_BASE, MASTERY_INFLATION } from '../constants';
+import { MASTERY_BASE, MASTERY_INFLATION } from '../../constants';
+import type { DmgBundle, PanelInput } from '../../types';
 
 /**
  * for prevChart, label starts from 1 with length 2 * boundary

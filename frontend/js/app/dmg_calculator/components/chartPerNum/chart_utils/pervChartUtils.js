@@ -1,4 +1,5 @@
 import { getMuteDelta, panelsToDmgList } from './utils';
+import type { PanelInput } from '../../types';
 
 export const marginOverPrev = (damages) => {
   const dataList = damages.map((each, index) => {

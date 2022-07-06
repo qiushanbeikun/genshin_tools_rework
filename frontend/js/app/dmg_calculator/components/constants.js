@@ -1,3 +1,5 @@
+import type { ChartSettingRow } from './types';
+
 export const INITIAL_PANEL: PanelInput = {
   life: 20000,
   base_atk: 800,
@@ -19,4 +21,23 @@ export const DEFAULT_SETTINGS: [ChartSettingRow] = [
   { name: 'ctk_rate', step: 3.5, value: 'CTK Rate' },
   { name: 'ctk_dmg', step: 7, value: 'CTK DMG' },
   { name: 'ele_mastery', step: 16, value: 'Ele Mastery' },
+];
+
+export const MOCK_PANELS = [
+  {
+    id: 1,
+    panel: INITIAL_PANEL,
+  },
+  {
+    id: 2,
+    panel: INITIAL_PANEL,
+  },
+  {
+    id: 3,
+    panel: INITIAL_PANEL,
+  },
+  {
+    id: 4,
+    panel: INITIAL_PANEL,
+  },
 ];

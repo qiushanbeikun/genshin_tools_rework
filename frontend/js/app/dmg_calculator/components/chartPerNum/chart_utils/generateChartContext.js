@@ -1,6 +1,6 @@
 import { baseChartData } from './baseChartUtils';
 import { prevChartData } from './pervChartUtils';
-import { GRAPH_COLORS_PRESETS } from '../constants';
+import { GRAPH_COLORS_PRESETS } from '../../constants';
 import { generateLabels } from './utils';
 
 export const generateChartContext = async (panel, labels, boundary, type) => {
@@ -28,7 +28,7 @@ export const generateChartContext = async (panel, labels, boundary, type) => {
     datasets: values.map((value, index) => {
       return {
         id: index,
-        label: labels[index].name,
+        label: labels[index].value,
         fill: true,
         pointHoverBorderWidth: 2,
         pointRadius: 1,

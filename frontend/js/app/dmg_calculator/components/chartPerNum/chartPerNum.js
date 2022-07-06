@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ErrorMessage, FormikProvider, useFormik, useFormikContext } from 'formik';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ChartSettings from './chartSettings';
 import {
   Chart as ChartJS,
@@ -17,7 +17,7 @@ import { Line } from 'react-chartjs-2';
 import useAsyncEffect from 'use-async-effect';
 import { generateChartContext } from './chart_utils/generateChartContext';
 import { chartEntryValidation } from './chart_utils/utils';
-import { DEFAULT_BOUNDARY, DEFAULT_SETTINGS } from './constants';
+import { DEFAULT_BOUNDARY, DEFAULT_SETTINGS } from '../constants';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -67,6 +67,7 @@ export default function ChartPerNum() {
 
   return (
     <>
+      <Typography variant="h5">Marginal Utilization</Typography>
       <FormikProvider value={formik}>
         <Box sx={{ m: '1em 0' }}>
           <ErrorMessage name="boundary" />

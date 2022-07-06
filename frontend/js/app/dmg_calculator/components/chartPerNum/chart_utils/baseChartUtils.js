@@ -1,4 +1,5 @@
 import { getMuteDelta, panelsToDmgList } from './utils';
+import type { PanelInput } from '../../types';
 
 export const generatePanelList = (
   boundary: number,
