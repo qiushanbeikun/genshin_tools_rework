@@ -1,6 +1,7 @@
-import { INITIAL_PANEL } from '../../constants';
+import { INITIAL_PANEL, PANEL_NAME_TO_TEXT } from '../../constants';
 import { IndexedPanel } from '../../types';
 import { PanelInput } from '../../types';
+import type { DmgBundle } from '../../types';
 
 export const isPanelExist = (panel: PanelInput, panelList: [IndexedPanel]): boolean => {
   return (
@@ -20,15 +21,18 @@ export const getNextId = (indexedPanelList: [IndexedPanel]): number => {
   return Math.max.apply(null, ids) + 1;
 };
 
-export const getContext = (indexedPanelList: [IndexedPanel]) => {
+export const buildTableContent = (indexedPanelList: [IndexedPanel]) => {
   const ids = indexedPanelList.map((indexedPanel) => indexedPanel.id);
   const rows = Object.keys(INITIAL_PANEL).map((key) => {
     const dataByKey = indexedPanelList.map((indexedPanel) => indexedPanel.panel[key]);
-    return { key, ...dataByKey };
+    const keyText = PANEL_NAME_TO_TEXT[key];
+    return { keyText, ...dataByKey };
   });
-
-  // for (const title of INITIAL_PANEL) {
-  // }
-
   return { ids, rows };
+};
+
+export const dmgCompare = (dmgBundles: [DmgBundle]) => {
+  const list = dmgBundles.map((dmgBundle) => dmgBundle.expectedDmg);
+  const base = list[0];
+  return list.map((dmg) => Math.floor((dmg / base) * 100));
 };

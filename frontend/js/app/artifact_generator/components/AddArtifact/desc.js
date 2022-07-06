@@ -1,13 +1,13 @@
-import * as React from "react";
-import {Grid, Typography} from "@mui/material";
+import * as React from 'react';
+import { Grid, Typography } from '@mui/material';
 
 export default function Desc() {
   return (
     <Grid item xs={4}>
       <h3>Description</h3>
-      <Typography paragraph>
-        圣遗物上传说明
-      </Typography>
+      <Typography paragraph>圣遗物上传说明</Typography>
+
+      <Typography paragraph>本页所需的内容均可以在游戏中找到，或者直接从官方Wiki复制。</Typography>
 
       <Typography paragraph>
         由于已经有其他网站拥有完备的圣遗物图片，本站计划套用该网站的图片，因此暂时关闭本站上传通道.
@@ -21,7 +21,7 @@ export default function Desc() {
         仅注册会员可以添加/修改圣遗物模板。请勿恶意修改，后台由自动程序监控，发现后会自动封号。
       </Typography>
       <Typography paragraph>
-        对于多行的文本，系统会自动记录换行和缩进。或在输入时加入“\n”分隔符以及对应的空格。
+        对于多行的文本，应用会自动记录换行和缩进。或在输入时加入“\n”分隔符以及对应的空格。
       </Typography>
 
       <Typography paragraph>
@@ -29,11 +29,13 @@ export default function Desc() {
         通常为圣遗物的英文名称，可以查看
         <a
           href="https://github.com/qiushanbeikun/genshin_tools_rework/tree/master/backend/artifact_generator/assets/artifacts"
-          target="_blank">
+          target="_blank"
+        >
           {` Github Repo `}
         </a>
         的backend/artifact_generator/assets/artifact 路径下的文件。
       </Typography>
+      <Typography paragraph>如有疑问，请参考作者已经添加的圣遗物模板。</Typography>
       <Typography paragraph>
         当前本站的圣遗物图片来自于
         <a href="https://github.com/wormtql/genshin_artifact" target="_blank">
@@ -41,5 +43,5 @@ export default function Desc() {
         </a>
       </Typography>
     </Grid>
-  )
+  );
 }

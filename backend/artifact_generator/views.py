@@ -7,7 +7,7 @@ from .blenders.blender_celestia import generate_celestia
 from .blenders.blender_teyvat import generate_teyvat
 from .serializers import *
 from users.models import User
-from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import F
 
 ENCODING = 'utf-8'
 

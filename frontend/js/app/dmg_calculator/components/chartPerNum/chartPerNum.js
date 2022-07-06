@@ -67,7 +67,9 @@ export default function ChartPerNum() {
 
   return (
     <>
-      <Typography variant="h5">Marginal Utilization</Typography>
+      <Box sx={{ m: '1em 0' }}>
+        <Typography variant="h5">Marginal Utilization</Typography>
+      </Box>
       <FormikProvider value={formik}>
         <Box sx={{ m: '1em 0' }}>
           <ErrorMessage name="boundary" />

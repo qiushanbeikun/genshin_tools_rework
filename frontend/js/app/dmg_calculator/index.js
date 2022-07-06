@@ -25,6 +25,19 @@ export default function DmgCalculator() {
     }
   };
 
+  const handleRemovePanel = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+    if (panels.length === 1) {
+      return;
+    }
+    const copy = [...panels];
+    const idx = copy.findIndex((panel) => panel.id === id);
+    copy.splice(idx, 1);
+    console.log(copy);
+    setPanels(copy);
+  };
+
   return (
     <Box maxWidth="lg" sx={{ m: '1em auto' }}>
       <FormikProvider value={formik}>
@@ -50,11 +63,13 @@ export default function DmgCalculator() {
               onChange={(e) => setMode(e.target.value)}
             >
               <ToggleButton value="chart_per_num">Mar. Num</ToggleButton>
-              <ToggleButton value="chart_per_bonus">Mar. Bonus</ToggleButton>
+              <ToggleButton value="chart_per_bonus" disabled>
+                Mar. Bonus(WIP)
+              </ToggleButton>
               <ToggleButton value="panel_comparison">Panel Comparison</ToggleButton>
             </ToggleButtonGroup>
 
-            <ChartSelection mode={mode} panels={panels} />
+            <ChartSelection mode={mode} panels={panels} removeFunc={handleRemovePanel} />
           </Grid>
         </Grid>
       </FormikProvider>
@@ -62,7 +77,7 @@ export default function DmgCalculator() {
   );
 }
 
-const ChartSelection = ({ mode, panels }) => {
+const ChartSelection = ({ mode, panels, removeFunc }) => {
   switch (mode) {
     default:
     case 'chart_per_num':
@@ -70,6 +85,6 @@ const ChartSelection = ({ mode, panels }) => {
     case 'chart_per_bonus':
       return <></>;
     case 'panel_comparison':
-      return <PanelComparison panels={panels} />;
+      return <PanelComparison indexedPanels={panels} removeFunc={removeFunc} />;
   }
 };

@@ -81,7 +81,7 @@ export default function Teyvat() {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: '80%' }}>
-              <InputLabel>圣遗物套装选择</InputLabel>
+              <InputLabel>Artifact Set</InputLabel>
               <Select value={formik.values.artiSet} onChange={formik.handleChange} name="artiSet">
                 {setNames.length !== 0 &&
                   setNames.map((each, index) => (
